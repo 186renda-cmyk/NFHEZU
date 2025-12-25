@@ -1,0 +1,23 @@
+# NFhezu.top 软路由配置 (已更新最新推广链接)
+
+# 1. 星际放映厅 (Star Cinema) - 左侧锚点
+/go/star       https://www.naifeistation.com/i/Satqr  302
+
+# 2. 账号星球 (Account Planet) - C位主推
+# 这里直达 Netflix 购买页，转化率最高
+/go/account-planet   https://accboyytbxmdh.acceboy.com/zh-cn-cny/buy-Netflix  302
+
+# 3. 飞行派 (Flying Pie) - 右侧备选
+/go/flying     https://spotifyzc.com/?incode=csw46m  302
+
+# 4. 银河录像局 (Galaxy) - 底部文字链
+/go/galaxy     https://nf.video/24MAX  302
+
+# 5. 奈飞小铺 (Naifei Shop) - 底部文字链
+/go/naifeishop https://ihezu.work/v9eUbF  302
+
+# 6. 小木导航 (Nav) - 底部强力推荐
+/go/nav        https://nav.xmpick.com/  302
+
+# 7. 兜底规则 (防止 404，让单页应用正常工作)
+/* /index.html   200
