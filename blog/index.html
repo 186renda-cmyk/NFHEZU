@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小木研习社 - 流媒体黑科技与教程 | NFHEZU.TOP</title>
+    
+    <meta name="description" content="小木研习社专注于分享Netflix、YouTube、Spotify等流媒体的使用教程、避坑指南和黑科技玩法。">
+    <meta name="keywords" content="Netflix教程, 奈飞避坑, 流媒体合租, YouTube会员, Spotify教程, 小木研习社">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nfhezu.top/blog/">
+    <meta property="og:title" content="小木研习社 - 探索流媒体黑科技">
+    <meta property="og:description" content="最新、最全的流媒体使用指南与避坑攻略。">
+    <meta property="og:image" content="images/devices-monitor.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        netflix: {
+                            red: '#E50914',
+                            dark: '#141414',
+                            gray: '#2F2F2F',
+                            hover: '#b2070f'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 font-weight=%22bold%22 fill=%22%23E50914%22>N</text></svg>">
+    
+    <style>
+        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; }
+        .hero-bg {
+            background-image: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, #000 100%), url('images/netflix-experience.png');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-netflix-red selection:text-white">
+
+    <!-- Navigation -->
+    <nav id="main-nav" class="fixed top-0 w-full z-50 transition-all duration-500 bg-black/70 backdrop-blur-xl border-b border-white/5 py-4">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-10 relative flex items-center justify-between h-12">
+            
+            <div class="flex-shrink-0 z-20">
+                <a href="../index.html" class="group flex items-baseline gap-0.5">
+                    <span class="text-[#E50914] text-3xl font-black tracking-tighter uppercase leading-none drop-shadow-2xl">NF</span>
+                    <span class="text-white text-3xl font-black tracking-tighter uppercase leading-none group-hover:text-gray-200 transition">HEZU</span>
+                    <span class="text-[10px] font-bold text-gray-500 self-start mt-1 ml-0.5 tracking-widest group-hover:text-gray-300 transition">.TOP</span>
+                </a>
+            </div>
+            
+            <div class="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-10 text-[14px] font-medium text-gray-400 tracking-wider z-10">
+                
+                <a href="../index.html#platforms" class="hover:text-white transition-colors duration-300 relative group py-2">
+                    严选平台
+                    <span class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-[#E50914] group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
+                </a>
+                
+                <a href="../index.html#compare" class="hover:text-white transition-colors duration-300 relative group py-2">
+                    价格对比
+                    <span class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-[#E50914] group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
+                </a>
+                
+                <a href="../index.html#guide" class="hover:text-white transition-colors duration-300 relative group py-2">
+                    新手指南
+                    <span class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-[#E50914] group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
+                </a>
+                
+                <a href="index.html" class="hover:text-white transition-colors duration-300 relative group py-2 flex items-start gap-1">
+                    探索发现
+                    <span class="text-[9px] bg-[#E50914] text-white px-1 rounded-sm leading-tight -mt-1 font-bold">BLOG</span>
+                    <span class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-[#E50914] group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
+                </a>
+                
+                <a href="../index.html#faq" class="hover:text-white transition-colors duration-300 relative group py-2">
+                    常见问题
+                    <span class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-[#E50914] group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
+                </a>
+            </div>
+
+            <div class="flex items-center gap-6 z-20">
+                
+                <a href="../index.html#download" class="hidden md:flex items-center gap-2 text-xs font-medium text-gray-400 hover:text-[#E50914] transition group" title="前往下载区">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    <span class="group-hover:underline decoration-1 underline-offset-4">App下载</span>
+                </a>
+
+                <div class="hidden md:block w-px h-3 bg-white/10"></div>
+
+                <a href="https://www.netflix.com/login" target="_blank" rel="nofollow noopener noreferrer" class="hidden md:flex px-5 py-2 rounded-full border border-white/20 text-xs font-bold text-white hover:bg-white hover:text-black hover:border-transparent transition-all duration-300">
+                    Login
+                </a>
+
+                <a href="../index.html#platforms" class="px-6 py-2 bg-[#E50914] text-white text-xs md:text-sm font-bold rounded-full hover:bg-red-700 hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(229,9,20,0.5)] flex items-center gap-2">
+                    立即发车
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-32 pb-24 min-h-screen">
+        <div class="max-w-6xl mx-auto px-4">
+            
+            <!-- Header -->
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-6xl font-black mb-6 tracking-tight">
+                    小木研习社 <span class="text-netflix-red">BLOG</span>
+                </h1>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
+                    探索流媒体世界的无限可能，从省钱攻略到进阶玩法，这里都有。
+                </p>
+                
+                <!-- Search & Filter -->
+                <div class="max-w-xl mx-auto">
+                    <div class="relative mb-8">
+                        <input type="text" id="searchInput" placeholder="搜索文章关键词..." class="w-full bg-[#1a1a1a] border border-white/10 rounded-full py-4 px-6 text-white placeholder-gray-500 focus:outline-none focus:border-netflix-red/50 focus:ring-1 focus:ring-netflix-red/50 transition">
+                        <button class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/10 p-2 rounded-full hover:bg-white/20 transition">
+                            <svg class="w-5 h-5 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                        </button>
+                    </div>
+                    
+                    <div class="flex flex-wrap justify-center gap-3" id="categoryFilters">
+                        <button class="filter-btn active px-4 py-1.5 rounded-full text-sm font-bold bg-white text-black transition hover:scale-105" data-category="all">全部</button>
+                        <button class="filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-[#1a1a1a] text-gray-400 border border-white/10 hover:border-white/30 hover:text-white transition hover:scale-105" data-category="guide">避坑指南</button>
+                        <button class="filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-[#1a1a1a] text-gray-400 border border-white/10 hover:border-white/30 hover:text-white transition hover:scale-105" data-category="tutorial">新手教程</button>
+                        <button class="filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-[#1a1a1a] text-gray-400 border border-white/10 hover:border-white/30 hover:text-white transition hover:scale-105" data-category="recommendation">片单推荐</button>
+                        <button class="filter-btn px-4 py-1.5 rounded-full text-sm font-bold bg-[#1a1a1a] text-gray-400 border border-white/10 hover:border-white/30 hover:text-white transition hover:scale-105" data-category="advanced">进阶玩法</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Articles Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="articlesGrid">
+                
+                <!-- Article 1 -->
+                <article class="group bg-[#121212] rounded-2xl overflow-hidden border border-white/10 hover:border-netflix-red/50 transition-all duration-300 hover:-translate-y-1" data-category="guide">
+                    <a href="netflix-buying-guide.html" class="block">
+                        <div class="aspect-video overflow-hidden relative">
+                            <img src="images/devices-monitor.png" alt="奈飞购买指南" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            <div class="absolute top-4 left-4 bg-netflix-red text-white text-xs font-bold px-2 py-1 rounded shadow-lg">避坑指南</div>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-xs text-gray-500 mb-2 flex items-center gap-2">
+                                <span>📅 2026-01-05</span>
+                                <span>•</span>
+                                <span>🔥 热度: 1.2w</span>
+                            </div>
+                            <h2 class="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-netflix-red transition">奈飞会员去哪里买最靠谱？2026年最新避坑指南</h2>
+                            <p class="text-gray-400 text-sm line-clamp-3 leading-relaxed">
+                                官方直购太贵？合租平台怕跑路？本文深度解析官方渠道与第三方平台的优劣，教你如何以最划算的价格购买 Netflix 会员，拒绝踩雷。
+                            </p>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="group bg-[#121212] rounded-2xl overflow-hidden border border-white/10 hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-1" data-category="tutorial">
+                    <a href="how-to-subscribe-netflix-in-china.html" class="block">
+                        <div class="aspect-video overflow-hidden relative">
+                            <img src="images/netflix-experience.png" alt="国内开通教程" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            <div class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg">新手教程</div>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-xs text-gray-500 mb-2 flex items-center gap-2">
+                                <span>📅 2026-01-06</span>
+                                <span>•</span>
+                                <span>🔥 热度: 8k</span>
+                            </div>
+                            <h2 class="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-blue-400 transition">在国内怎么开通奈飞会员？2026 保姆级教程</h2>
+                            <p class="text-gray-400 text-sm line-clamp-3 leading-relaxed">
+                                详解官方礼品卡兑换与虚拟信用卡支付两种方式，手把手教你解决支付和网络难题，轻松实现观影自由。含礼品卡购买渠道推荐。
+                            </p>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="group bg-[#121212] rounded-2xl overflow-hidden border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-1" data-category="recommendation">
+                    <a href="netflix-best-movies-shows.html" class="block">
+                        <div class="aspect-video overflow-hidden relative">
+                            <img src="images/netflix-experience.png" alt="2026奈飞片单" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            <div class="absolute top-4 left-4 bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg">片单推荐</div>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-xs text-gray-500 mb-2 flex items-center gap-2">
+                                <span>📅 2026-01-07</span>
+                                <span>•</span>
+                                <span>🔥 热度: 1.5w</span>
+                            </div>
+                            <h2 class="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-purple-400 transition">2026 奈飞(Netflix) 看什么？高分神剧与电影必看片单推荐</h2>
+                            <p class="text-gray-400 text-sm line-clamp-3 leading-relaxed">
+                                精选《怪奇物语》、《黑镜》、《百年孤独》等口碑炸裂的电视剧与电影，涵盖悬疑、科幻、动作等多种题材，治愈你的剧荒。
+                            </p>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Article 4 (External) -->
+                <article class="group bg-[#121212] rounded-2xl overflow-hidden border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-1" data-category="advanced">
+                    <a href="https://www.xmpick.com/tag/netflix/" target="_blank" rel="nofollow noopener noreferrer" class="block">
+                        <div class="aspect-video overflow-hidden relative bg-gradient-to-br from-purple-900 to-black flex items-center justify-center">
+                            <span class="text-6xl group-hover:scale-110 transition duration-300">🍿</span>
+                            <div class="absolute top-4 left-4 bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg">进阶玩法</div>
+                            <div class="absolute top-4 right-4 text-white/50 text-xs bg-black/30 px-2 py-1 rounded backdrop-blur-sm">外部链接 ↗</div>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-xs text-gray-500 mb-2 flex items-center gap-2">
+                                <span>📅 更新中</span>
+                                <span>•</span>
+                                <span>📚 系列教程</span>
+                            </div>
+                            <h2 class="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-purple-400 transition">Netflix 使用教程大全 (持续更新)</h2>
+                            <p class="text-gray-400 text-sm line-clamp-3 leading-relaxed">
+                                包含中文设置、解锁 4K HDR、挂载字幕、倍速播放等实用技巧。从入门到精通，彻底榨干你的 Netflix 会员价值。
+                            </p>
+                        </div>
+                    </a>
+                </article>
+
+            </div>
+
+            <!-- Pagination -->
+            <div class="mt-16 flex justify-center items-center gap-4">
+                <button class="px-4 py-2 rounded-lg bg-[#1a1a1a] text-gray-500 cursor-not-allowed" disabled>← 上一页</button>
+                <div class="flex items-center gap-2">
+                    <button class="w-10 h-10 rounded-lg bg-netflix-red text-white font-bold">1</button>
+                    <!-- <button class="w-10 h-10 rounded-lg bg-[#1a1a1a] text-gray-400 hover:bg-white/10 transition">2</button> -->
+                </div>
+                <button class="px-4 py-2 rounded-lg bg-[#1a1a1a] text-gray-500 cursor-not-allowed" disabled>下一页 →</button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-black border-t border-white/5 text-sm">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-10 text-center text-gray-600">
+            <p>&copy; 2026 NFhezu.top. All rights reserved.</p>
+            <div class="mt-4">
+                <a href="../index.html" class="hover:text-white transition mx-2">返回首页</a>
+                <span class="text-gray-800">|</span>
+                <a href="#" class="hover:text-white transition mx-2">关于我们</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Filter Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const articles = document.querySelectorAll('#articlesGrid article');
+            const searchInput = document.getElementById('searchInput');
+
+            // Category Filter
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active state
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-white', 'text-black');
+                        b.classList.add('bg-[#1a1a1a]', 'text-gray-400');
+                    });
+                    btn.classList.remove('bg-[#1a1a1a]', 'text-gray-400');
+                    btn.classList.add('bg-white', 'text-black');
+
+                    const category = btn.getAttribute('data-category');
+                    filterArticles(category, searchInput.value);
+                });
+            });
+
+            // Search Filter
+            searchInput.addEventListener('input', (e) => {
+                const activeBtn = document.querySelector('.filter-btn.bg-white');
+                const category = activeBtn.getAttribute('data-category');
+                filterArticles(category, e.target.value);
+            });
+
+            function filterArticles(category, searchTerm) {
+                const term = searchTerm.toLowerCase();
+
+                articles.forEach(article => {
+                    const articleCategory = article.getAttribute('data-category');
+                    const title = article.querySelector('h2').innerText.toLowerCase();
+                    const desc = article.querySelector('p').innerText.toLowerCase();
+                    
+                    const matchesCategory = category === 'all' || articleCategory === category;
+                    const matchesSearch = title.includes(term) || desc.includes(term);
+
+                    if (matchesCategory && matchesSearch) {
+                        article.style.display = 'block';
+                        // Add fade-in animation
+                        article.style.opacity = '0';
+                        setTimeout(() => article.style.opacity = '1', 50);
+                    } else {
+                        article.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
