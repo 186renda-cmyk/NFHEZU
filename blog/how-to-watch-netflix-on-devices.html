@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奈飞怎么看剧？电脑/手机/电视全设备观看指南 | NFHEZU.TOP</title>
+    <meta name="description" content="想看 Netflix 却不知道怎么操作？本文为您提供 Windows/Mac 电脑、iOS/Android 手机、以及智能电视/电视盒子的详细观看教程，涵盖下载、登录及网络设置。">
+    <meta name="keywords" content="奈飞怎么看, Netflix电脑看, Netflix手机APP下载, 奈飞电视端安装, Netflix TV版, 奈飞投屏, 奈飞4K画质设置">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://nfhezu.top/blog/how-to-watch-netflix-on-devices.html">
+    <meta property="og:title" content="奈飞怎么看剧？电脑/手机/电视全设备观看指南">
+    <meta property="og:description" content="全设备教程：教你如何在电脑浏览器、手机APP和电视大屏上流畅观看 Netflix。">
+    <meta property="og:image" content="images/devices-monitor.png">
+    <link rel="canonical" href="https://nfhezu.top/blog/how-to-watch-netflix-on-devices.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        netflix: { red: '#E50914', dark: '#141414', gray: '#2F2F2F', hover: '#b2070f' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'glow': '0 0 40px rgba(229, 9, 20, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 font-weight=%22bold%22 fill=%22%23E50914%22>N</text></svg>">
+    <style>
+        body { background-color: #020617; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .glass-card { background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .gradient-text { background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "首页",
+        "item": "https://nfhezu.top/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "探索发现",
+        "item": "https://nfhezu.top/blog/"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "奈飞怎么看剧？电脑/手机/电视全设备观看指南",
+        "item": "https://nfhezu.top/blog/how-to-watch-netflix-on-devices.html"
+      }]
+    }
+    </script>
+</head>
+<body class="antialiased selection:bg-netflix-red selection:text-white">
+
+    <!-- Navigation -->
+    <nav id="main-nav" class="fixed top-0 w-full z-50 transition-all duration-500 bg-black/70 backdrop-blur-xl border-b border-white/5 py-4">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-10 relative flex items-center justify-between h-12">
+            
+            <!-- Brand Logo -->
+            <div class="flex-shrink-0 z-20">
+                <a href="../index.html" class="group flex items-center gap-3">
+                    <div class="relative w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#1a1a1a] to-black rounded-lg border border-white/10 shadow-xl group-hover:border-netflix-red/50 transition-all duration-300 overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <svg class="w-5 h-5 text-[#E50914] transform group-hover:scale-110 group-hover:rotate-3 transition duration-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M5.5 3.5A1.5 1.5 0 0 1 8 2.378l11.5 8.25a1.5 1.5 0 0 1 0 2.444L8 21.322A1.5 1.5 0 0 1 5.5 20.2V3.5z" />
+                        </svg>
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <div class="flex items-baseline">
+                            <span class="font-black text-xl tracking-tighter text-white leading-none group-hover:text-gray-100 transition">NFHEZU</span>
+                            <span class="text-[#E50914] text-xs font-bold ml-0.5 transform -translate-y-0.5">.TOP</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Centered Navigation -->
+            <div class="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-8 text-[14px] font-medium text-gray-400 tracking-wider z-10">
+                <a href="../index.html" class="hover:text-white transition-colors duration-300 relative group py-2">首页<span class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-[#E50914] group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span></a>
+                <a href="../index.html#platforms" class="hover:text-white transition-colors duration-300 relative group py-2">严选平台<span class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-[#E50914] group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span></a>
+                <a href="../index.html#compare" class="hover:text-white transition-colors duration-300 relative group py-2">价格对比<span class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-[#E50914] group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span></a>
+                <a href="../index.html#guide" class="hover:text-white transition-colors duration-300 relative group py-2">新手指南<span class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-[#E50914] group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span></a>
+                <a href="../index.html#blog" class="hover:text-white transition-colors duration-300 relative group py-2 flex items-start gap-1">探索发现<span class="text-[9px] bg-[#E50914] text-white px-1 rounded-sm leading-tight -mt-1 font-bold animate-pulse">NEW</span><span class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-[#E50914] group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span></a>
+            </div>
+
+            <div class="flex items-center gap-6 z-20">
+                <a href="../index.html#platforms" class="px-6 py-2 bg-[#E50914] text-white text-xs md:text-sm font-bold rounded-full hover:bg-red-700 hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(229,9,20,0.5)] flex items-center gap-2">立即发车</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-24 max-w-7xl mx-auto px-6">
+        
+        <!-- Breadcrumb -->
+        <nav class="flex mb-8 text-xs text-slate-500 font-medium tracking-wide uppercase">
+            <a href="../index.html" class="hover:text-slate-300 transition">首页</a>
+            <span class="mx-2">/</span>
+            <a href="index.html" class="hover:text-slate-300 transition">Blog</a>
+            <span class="mx-2">/</span>
+            <span class="text-slate-300">观看指南</span>
+        </nav>
+
+        <div class="flex flex-col lg:flex-row gap-16">
+            
+            <!-- Left Content (Article) -->
+            <article class="lg:w-[68%] space-y-12">
+                
+                <!-- Hero Section -->
+                <header class="space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-500 text-xs font-bold uppercase tracking-widest mb-4">
+                        Devices Guide 2026
+                    </div>
+                    <h1 class="text-4xl md:text-6xl font-black leading-tight text-white tracking-tight">
+                        奈飞怎么看剧？<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#E50914] to-red-600">全设备观看终极指南</span>
+                    </h1>
+                    <p class="text-xl text-slate-400 leading-relaxed max-w-2xl">
+                        想看 Netflix，核心步骤就是先解决网络问题，再注册会员。本文分设备（电脑/手机/电视）手把手教您如何操作。
+                    </p>
+                    <div class="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl group">
+                        <img src="images/devices-monitor.png" alt="Netflix on Devices" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent"></div>
+                    </div>
+                </header>
+
+                <!-- Core Steps -->
+                <section>
+                    <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                        <span class="w-1 h-6 bg-[#E50914] rounded-full"></span>
+                        电脑端怎么看？
+                    </h2>
+                    <div class="glass-card p-8 rounded-2xl">
+                        <p class="text-slate-300 mb-6">
+                            电脑看 Netflix 最方便，直接用浏览器访问官网 <a href="https://www.netflix.com" target="_blank" rel="nofollow" class="text-netflix-red hover:underline">netflix.com</a> 即可，无需下载 App。
+                        </p>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-black/30 p-5 rounded-xl border border-white/5">
+                                <h3 class="font-bold text-white mb-2">💻 浏览器选择（画质关键）</h3>
+                                <ul class="space-y-2 text-sm text-slate-400">
+                                    <li><span class="text-green-400">Windows：</span> 推荐 <strong>Microsoft Edge</strong> (支持 4K)</li>
+                                    <li><span class="text-green-400">macOS：</span> 推荐 <strong>Safari</strong> (支持 4K/HDR)</li>
+                                    <li><span class="text-red-400">不推荐：</span> Chrome/Firefox (最高仅 720p/1080p)</li>
+                                </ul>
+                            </div>
+                            <div class="bg-black/30 p-5 rounded-xl border border-white/5">
+                                <h3 class="font-bold text-white mb-2">🔍 检查当前画质</h3>
+                                <p class="text-xs text-slate-500 mb-2">播放时按下快捷键查看详细参数：</p>
+                                <ul class="space-y-2 text-sm text-slate-400">
+                                    <li><strong>Win：</strong> Ctrl + Shift + Alt + D</li>
+                                    <li><strong>Mac：</strong> Shift + Control + Option + D</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                        <span class="w-1 h-6 bg-[#E50914] rounded-full"></span>
+                        手机 / 平板怎么看？
+                    </h2>
+                    <div class="glass-card p-8 rounded-2xl space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 font-bold shrink-0">1</div>
+                            <div>
+                                <h3 class="text-lg font-bold text-white mb-2">iOS (iPhone/iPad)</h3>
+                                <p class="text-sm text-slate-400">需使用<strong>非中国区 Apple ID</strong>（如美区/港区）登录 App Store，搜索 "Netflix" 下载。如果没有外区 ID，可以<a href="https://global-apple-id.top/" target="_blank" class="text-netflix-red underline">购买一个美区 ID</a>。</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 font-bold shrink-0">2</div>
+                            <div>
+                                <h3 class="text-lg font-bold text-white mb-2">Android (安卓)</h3>
+                                <p class="text-sm text-slate-400 mb-2">在 Google Play 商店下载。注意：</p>
+                                <ul class="list-disc pl-4 text-sm text-slate-500 space-y-1">
+                                    <li>国产手机（华为/小米等）若缺失 Google 框架，可能无法运行。</li>
+                                    <li>如无法使用 Play 商店，可去 APKPure 或 APKMirror 下载安装包。</li>
+                                    <li>手机需支持 Widevine L1 认证才能看高清，否则只能看标清 (L3)。</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                        <span class="w-1 h-6 bg-[#E50914] rounded-full"></span>
+                        电视端怎么看？（最爽体验）
+                    </h2>
+                    <div class="bg-gradient-to-br from-[#1e293b] to-[#0f172a] p-8 rounded-2xl border border-white/10">
+                        <p class="text-slate-300 mb-6">
+                            电视端是 Netflix 的最佳打开方式，但也是门槛最高的。
+                        </p>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <svg class="w-6 h-6 text-netflix-red mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                                <div>
+                                    <h3 class="font-bold text-white">下载 App</h3>
+                                    <p class="text-sm text-slate-400 mt-1">在电视自带的应用商店（需非国行系统）或通过 USB 安装包安装。国产电视通常需要购买外贸盒子（Apple TV / Chromecast / Fire Stick）。</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <svg class="w-6 h-6 text-netflix-red mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
+                                <div>
+                                    <h3 class="font-bold text-white">登录账户</h3>
+                                    <p class="text-sm text-slate-400 mt-1">使用遥控器输入账号密码。如果是合租账号，请选择属于你的车位（Profile）。</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <svg class="w-6 h-6 text-netflix-red mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                <div>
+                                    <h3 class="font-bold text-white">网络环境</h3>
+                                    <p class="text-sm text-slate-400 mt-1">电视端同样需要网络环境支持。通常需要在路由器层面设置，或使用软路由/网关。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Free vs Paid -->
+                <section>
+                    <div class="bg-red-900/10 border border-red-500/20 p-6 rounded-2xl">
+                        <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
+                            🚫 有没有免费看的方法？
+                        </h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            虽然市面上有通过 Cookie 共享或第三方破解版 App 免费看的方法，但<strong>极不稳定且存在安全风险</strong>（隐私泄露/设备中毒）。Netflix 官方没有免费计划。为了获得稳定、4K 高清的体验，强烈建议购买正版会员或参与合租。
+                        </p>
+                    </div>
+                </section>
+
+                <div class="mt-12 pt-8 border-t border-white/10">
+                    <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                        <span class="w-1 h-6 bg-netflix-red rounded-full"></span>
+                        推荐阅读
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <a href="how-to-watch-netflix-in-china.html" class="group block bg-[#1a1a1a] rounded-xl overflow-hidden border border-white/5 hover:border-white/20 transition-all duration-300">
+                            <div class="p-5">
+                                <h4 class="text-lg font-bold text-white mb-2 group-hover:text-netflix-red transition line-clamp-2">奈飞会员在国内怎么用？2026 终极观看指南</h4>
+                                <p class="text-sm text-gray-400 line-clamp-2 mb-4">一文解决国内看奈飞的所有难题：网络、账号、支付、电视端设置。</p>
+                                <div class="flex items-center text-xs text-netflix-red font-bold uppercase tracking-wider">
+                                    阅读文章 <svg class="w-3 h-3 ml-1 group-hover:translate-x-1 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="how-to-subscribe-netflix-in-china.html" class="group block bg-[#1a1a1a] rounded-xl overflow-hidden border border-white/5 hover:border-white/20 transition-all duration-300">
+                            <div class="p-5">
+                                <h4 class="text-lg font-bold text-white mb-2 group-hover:text-netflix-red transition line-clamp-2">在国内怎么开通奈飞会员？2026年最新保姆级教程</h4>
+                                <p class="text-sm text-gray-400 line-clamp-2 mb-4">详解官方礼品卡兑换与虚拟信用卡支付两种方式，手把手教你解决支付难题。</p>
+                                <div class="flex items-center text-xs text-netflix-red font-bold uppercase tracking-wider">
+                                    阅读文章 <svg class="w-3 h-3 ml-1 group-hover:translate-x-1 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </article>
+
+            <!-- Right Sidebar (Sticky) -->
+            <aside class="lg:w-[32%] space-y-8">
+                
+                <div class="sticky top-24 space-y-8">
+                    <!-- Sales Card (E-commerce Style) -->
+                    <div class="bg-[#1a1a1a] rounded-2xl p-6 border border-netflix-red/30 shadow-[0_0_30px_rgba(229,9,20,0.15)] group hover:border-netflix-red/50 transition-all duration-300">
+                        
+                        <!-- Header: Urgency & Social Proof -->
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-500/10 border border-red-500/20">
+                                <span class="relative flex h-2 w-2">
+                                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                                  <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                                </span>
+                                <span class="text-[10px] font-bold text-red-400 uppercase tracking-wider">限时特惠</span>
+                            </div>
+                            <div class="text-[10px] text-slate-400 flex items-center gap-1">
+                                🔥 <span class="text-white font-bold">2,849</span> 人已上车
+                            </div>
+                        </div>
+
+                        <!-- Product Info -->
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-16 h-16 bg-black rounded-xl flex items-center justify-center border border-white/10 shadow-lg shrink-0">
+                                 <svg class="w-10 h-10 text-[#E50914] fill-current" viewBox="0 0 24 24">
+                                    <path d="M15.6667 0H21.3333V24H15.6667V10.6667L8.33333 24H2.66667V0H8.33333V13.3333L15.6667 0Z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-black text-white leading-tight mb-1">Netflix Premium</h3>
+                                <div class="flex items-center gap-1">
+                                    <div class="flex text-yellow-500 text-xs">★★★★★</div>
+                                    <span class="text-[10px] text-slate-500">(4.9分)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Price Section -->
+                        <div class="bg-black/40 rounded-xl p-4 mb-6 border border-white/5 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg">
+                                省 80%
+                            </div>
+                            <div class="flex items-baseline justify-between mb-1">
+                                <span class="text-xs text-slate-500 line-through">官网原价 ¥90+</span>
+                                <span class="text-xs text-green-400 font-bold">极速自动发货</span>
+                            </div>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-sm text-red-500 font-bold">¥</span>
+                                <span class="text-4xl font-black text-white tracking-tight">15</span>
+                                <span class="text-sm text-slate-400">/ 月起</span>
+                            </div>
+                        </div>
+
+                        <!-- Benefits List -->
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center gap-3 text-sm text-slate-300">
+                                <div class="w-5 h-5 rounded-full bg-green-900/30 flex items-center justify-center shrink-0">
+                                    <svg class="w-3 h-3 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <span>4K HDR + 杜比全景声</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-sm text-slate-300">
+                                <div class="w-5 h-5 rounded-full bg-green-900/30 flex items-center justify-center shrink-0">
+                                    <svg class="w-3 h-3 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <span>独立车位 PIN 码锁</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-sm text-slate-300">
+                                <div class="w-5 h-5 rounded-full bg-green-900/30 flex items-center justify-center shrink-0">
+                                    <svg class="w-3 h-3 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <span>翻车全额包赔承诺</span>
+                            </li>
+                        </ul>
+
+                        <!-- CTA Button -->
+                        <a href="../index.html#platforms" class="block w-full py-4 bg-[#E50914] hover:bg-red-600 text-white text-center font-bold text-lg rounded-xl transition-all shadow-[0_4px_20px_rgba(229,9,20,0.4)] hover:shadow-[0_6px_25px_rgba(229,9,20,0.6)] hover:-translate-y-0.5 relative overflow-hidden group/btn">
+                            <span class="relative z-10 flex items-center justify-center gap-2">
+                                立即上车
+                                <svg class="w-5 h-5 group-hover/btn:translate-x-1 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                            </span>
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:animate-[shimmer_1.5s_infinite]"></div>
+                        </a>
+                        
+                        <!-- Trust Footer -->
+                        <div class="mt-4 flex items-center justify-center gap-4 opacity-50 grayscale hover:grayscale-0 transition duration-500">
+                            <span class="text-[10px] text-slate-500 flex items-center gap-1">🛡️ 支付宝/微信支付</span>
+                            <span class="text-[10px] text-slate-500 flex items-center gap-1">⚡️ 自动发货</span>
+                        </div>
+                    </div>
+
+                    <!-- Trust Badges -->
+                    <div class="bg-[#1a1a1a] rounded-xl p-6 border border-white/5">
+                        <h4 class="font-bold text-white mb-4">为什么信任我们？</h4>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-full bg-blue-900/30 flex items-center justify-center text-blue-400">🛡️</div>
+                                <div class="text-sm text-gray-400">
+                                    <strong class="text-white block mb-0.5">严格筛选</strong>
+                                    仅收录运营 2 年以上的正规备案平台。
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-full bg-green-900/30 flex items-center justify-center text-green-400">💰</div>
+                                <div class="text-sm text-gray-400">
+                                    <strong class="text-white block mb-0.5">价格透明</strong>
+                                    拒绝隐形消费，明确标示最终到手价格。
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="bg-[#0f172a]/30 rounded-2xl p-6 border border-white/5">
+                    <h4 class="font-bold text-white text-sm uppercase tracking-wider mb-4">更多资源</h4>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="netflix-best-movies-shows.html" class="flex items-center gap-3 text-sm text-slate-400 hover:text-white transition group">
+                                <span class="w-1.5 h-1.5 rounded-full bg-slate-600 group-hover:bg-[#E50914] transition"></span>
+                                2026 奈飞高分片单推荐
+                            </a>
+                        </li>
+                        <li>
+                            <a href="netflix-buying-guide.html" class="flex items-center gap-3 text-sm text-slate-400 hover:text-white transition group">
+                                <span class="w-1.5 h-1.5 rounded-full bg-slate-600 group-hover:bg-[#E50914] transition"></span>
+                                账号购买避坑指南
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../index.html#faq" class="flex items-center gap-3 text-sm text-slate-400 hover:text-white transition group">
+                                <span class="w-1.5 h-1.5 rounded-full bg-slate-600 group-hover:bg-[#E50914] transition"></span>
+                                常见错误代码解决
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Simple Footer -->
+    <footer class="border-t border-white/5 py-12 bg-black">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-slate-500 text-xs mb-4">&copy; 2026 NFhezu.top. All rights reserved.</p>
+            <div class="flex justify-center gap-6 text-xs text-slate-600">
+                <a href="../disclaimer.html" class="hover:text-slate-400 transition">免责声明</a>
+                <a href="../privacy.html" class="hover:text-slate-400 transition">隐私政策</a>
+                <a href="mailto:support@nfhezu.top" class="hover:text-slate-400 transition">联系我们</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
