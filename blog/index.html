@@ -45,6 +45,23 @@
             background-position: center;
         }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "首页",
+        "item": "https://nfhezu.top/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "探索发现",
+        "item": "https://nfhezu.top/blog/"
+      }]
+    }
+    </script>
 </head>
 <body class="antialiased selection:bg-netflix-red selection:text-white">
 
@@ -108,6 +125,24 @@
     <main class="pt-32 pb-24 min-h-screen">
         <div class="max-w-6xl mx-auto px-4">
             
+            <!-- Breadcrumb -->
+            <nav class="flex mb-8 text-sm text-gray-500" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                    <li class="inline-flex items-center">
+                        <a href="../index.html" class="inline-flex items-center hover:text-white transition-colors">
+                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+                            首页
+                        </a>
+                    </li>
+                    <li aria-current="page">
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-gray-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                            <span class="ml-1 text-white font-medium">探索发现</span>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+
             <!-- Header -->
             <div class="text-center mb-16">
                 <h1 class="text-4xl md:text-6xl font-black mb-6 tracking-tight">
