@@ -96,15 +96,6 @@
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "BreadcrumbList",
-          "itemListElement": [{
-            "@type": "ListItem",
-            "position": 1,
-            "name": "首页",
-            "item": "https://nfhezu.top/"
-          }]
-        },
-        {
           "@type": "WebSite",
           "name": "NFHEZU.TOP - 奈飞合租严选",
           "url": "https://nfhezu.top/",
@@ -276,16 +267,32 @@
     <nav id="main-nav" class="fixed top-0 w-full z-50 transition-all duration-500 bg-black/70 backdrop-blur-xl border-b border-white/5 py-4">
         <div class="max-w-[1400px] mx-auto px-6 md:px-10 relative flex items-center justify-between h-12">
             
+            <!-- Brand Logo -->
             <div class="flex-shrink-0 z-20">
-                <a href="#" class="group flex items-baseline gap-0.5" onclick="window.scrollTo(0,0)">
-                    <span class="text-[#E50914] text-3xl font-black tracking-tighter uppercase leading-none drop-shadow-2xl">NF</span>
-                    <span class="text-white text-3xl font-black tracking-tighter uppercase leading-none group-hover:text-gray-200 transition">HEZU</span>
-                    <span class="text-[10px] font-bold text-gray-500 self-start mt-1 ml-0.5 tracking-widest group-hover:text-gray-300 transition">.TOP</span>
+                <a href="#" class="group flex items-center gap-3" onclick="window.scrollTo(0,0); return false;">
+                    <div class="relative w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#1a1a1a] to-black rounded-lg border border-white/10 shadow-xl group-hover:border-netflix-red/50 transition-all duration-300 overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <svg class="w-5 h-5 text-[#E50914] transform group-hover:scale-110 group-hover:rotate-3 transition duration-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M5.5 3.5A1.5 1.5 0 0 1 8 2.378l11.5 8.25a1.5 1.5 0 0 1 0 2.444L8 21.322A1.5 1.5 0 0 1 5.5 20.2V3.5z" />
+                        </svg>
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <div class="flex items-baseline">
+                            <span class="font-black text-xl tracking-tighter text-white leading-none group-hover:text-gray-100 transition">NFHEZU</span>
+                            <span class="text-[#E50914] text-xs font-bold ml-0.5 transform -translate-y-0.5">.TOP</span>
+                        </div>
+                    </div>
                 </a>
             </div>
             
-            <div class="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-10 text-[14px] font-medium text-gray-400 tracking-wider z-10">
+            <!-- Centered Navigation -->
+            <div class="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-8 text-[14px] font-medium text-gray-400 tracking-wider z-10">
                 
+                <a href="#" class="hover:text-white transition-colors duration-300 relative group py-2" onclick="window.scrollTo(0,0); return false;">
+                    首页
+                    <span class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-[#E50914] group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
+                </a>
+
                 <a href="#platforms" class="hover:text-white transition-colors duration-300 relative group py-2">
                     严选平台
                     <span class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-[#E50914] group-hover:w-full group-hover:left-0 transition-all duration-300 ease-out"></span>
@@ -836,21 +843,15 @@
                     </div>
                 </a>
 
-                <a href="#guide" class="md:col-span-2 group relative overflow-hidden rounded-2xl aspect-video md:aspect-auto md:h-48 border border-white/10 hover:border-green-500/50 transition-all duration-300">
+                <a href="blog/how-to-watch-netflix-in-china.html" class="md:col-span-2 group relative overflow-hidden rounded-2xl aspect-video md:aspect-auto md:h-48 border border-white/10 hover:border-green-500/50 transition-all duration-300">
                     <div class="absolute inset-0 bg-gradient-to-br from-green-950 to-black z-0"></div>
-                    <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition z-10"></div>
+                    <div class="absolute inset-0 bg-[url('images/netflix-experience.png')] bg-cover bg-center opacity-20 mix-blend-overlay group-hover:scale-105 transition duration-700"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent z-10"></div>
                     
-                    <div class="absolute inset-0 flex flex-col justify-end p-5 z-20">
-                        <div class="flex justify-between items-end">
-                            <div>
-                                <div class="text-[10px] text-green-400 font-bold mb-2 uppercase tracking-wider bg-green-900/30 px-2 py-0.5 rounded w-fit">Tutorials</div>
-                                <h3 class="text-xl font-bold text-white group-hover:text-green-400 transition">Netflix 独家使用技巧</h3>
-                                <p class="text-xs text-gray-400 mt-1 group-hover:text-gray-200">解锁 4K HDR、挂载中文字幕、倍速播放...</p>
-                            </div>
-                            <div class="opacity-50 group-hover:opacity-100 group-hover:scale-110 transition duration-500 bg-white/10 p-2 rounded-full">
-                                <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                            </div>
-                        </div>
+                    <div class="absolute bottom-5 left-5 z-20 pr-4">
+                        <div class="text-[10px] text-green-400 bg-green-900/30 border border-green-500/30 px-2 py-0.5 rounded font-bold mb-2 inline-block">观看指南</div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-green-400 transition leading-tight mb-1">奈飞会员在国内怎么用？<br>2026 最新观看指南</h3>
+                        <p class="text-xs text-gray-400 mt-1 line-clamp-1 group-hover:text-gray-200 transition">网络环境、账号购买、电视端配置一站式解决。</p>
                     </div>
                 </a>
             </div>
@@ -974,86 +975,120 @@
         </div>
     </section>
 
-<footer class="relative bg-[#020617] border-t border-white/5 pt-24 pb-12 overflow-hidden">
+<footer class="relative bg-[#020617] border-t border-white/5 pt-20 pb-10 overflow-hidden text-sm">
+    <!-- Background Effects -->
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-[#E50914]/50 to-transparent"></div>
-    <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-red-600/5 rounded-full blur-[128px] pointer-events-none"></div>
-    <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purple-600/5 rounded-full blur-[128px] pointer-events-none"></div>
+    <div class="absolute -top-24 -left-24 w-96 h-96 bg-red-600/10 rounded-full blur-3xl pointer-events-none opacity-50"></div>
+    <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none opacity-50"></div>
 
     <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20">
+        <!-- Main Footer Content -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
             
-            <div class="lg:col-span-5 space-y-8">
-                <a href="#" class="inline-flex items-center gap-3 group" onclick="window.scrollTo(0,0)">
-                    <div class="relative w-10 h-10 flex items-center justify-center bg-slate-800/50 rounded-xl border border-white/10 group-hover:border-[#E50914]/50 transition duration-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="url(#brandGradientFooter3)" class="w-6 h-6">
-                            <defs>
-                                <linearGradient id="brandGradientFooter3" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#E50914;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#ff4d4d;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
-                        </svg>
-                    </div>
-                    <div class="flex flex-col justify-center">
-                        <span class="font-bold text-2xl tracking-tight text-white leading-none">
-                          NF<span class="text-[#E50914] text-3xl leading-none">HEZU.</span>
-                        </span>
-                        <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1 group-hover:text-slate-400 transition">Premium Streaming</span>
+            <!-- Brand Column -->
+            <div class="lg:col-span-4 space-y-8">
+                <a href="#" class="block group" onclick="window.scrollTo(0,0)">
+                    <div class="flex items-center gap-4">
+                        <!-- Premium Logo: Abstract Geometric Play Symbol -->
+                        <div class="relative w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#1a1a1a] to-black rounded-xl border border-white/10 shadow-2xl group-hover:border-netflix-red/50 group-hover:shadow-[0_0_25px_rgba(229,9,20,0.25)] transition-all duration-500 overflow-hidden">
+                            <!-- Shine Effect -->
+                            <div class="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                            
+                            <svg class="w-6 h-6 text-[#E50914] transform group-hover:scale-110 group-hover:rotate-3 transition duration-500 drop-shadow-[0_0_8px_rgba(229,9,20,0.6)]" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M5.5 3.5A1.5 1.5 0 0 1 8 2.378l11.5 8.25a1.5 1.5 0 0 1 0 2.444L8 21.322A1.5 1.5 0 0 1 5.5 20.2V3.5z" />
+                            </svg>
+                        </div>
+                        
+                        <div class="flex flex-col justify-center h-12">
+                            <div class="flex items-baseline">
+                                <span class="font-black text-2xl tracking-tighter text-white leading-none group-hover:text-gray-100 transition">
+                                    NFHEZU
+                                </span>
+                                <span class="text-[#E50914] text-xs font-bold ml-0.5 transform -translate-y-1">.TOP</span>
+                            </div>
+                            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.25em] group-hover:text-[#E50914] transition duration-500 mt-1">
+                                Premium Streaming
+                            </span>
+                        </div>
                     </div>
                 </a>
                 
-                <p class="text-slate-500 text-sm leading-relaxed max-w-sm">
-                    NFhezu 致力于构建全网最稳的流媒体合租平台。通过自动化交付系统，为您提供安全、稳定、4K HDR 的 Netflix 账号解决方案。
+                <p class="text-slate-400 text-sm leading-7 pr-4 border-l-2 border-white/5 pl-4 hover:border-netflix-red/30 transition-colors duration-300">
+                    专注于流媒体合租服务的自动化交付平台。<br>
+                    为您提供安全、稳定、4K HDR 的 Netflix 账号解决方案，让优质内容触手可及。
                 </p>
 
-                <div class="inline-flex items-center gap-3 px-4 py-2 bg-[#0F172A] border border-white/5 rounded-full hover:border-[#E50914]/30 transition duration-300 group cursor-default">
-                    <span class="relative flex h-2.5 w-2.5">
+                 <div class="inline-flex items-center gap-2.5 px-4 py-2 bg-[#0F172A] border border-white/5 rounded-full cursor-default hover:border-green-500/30 transition-all duration-300 hover:bg-[#0F172A]/80">
+                    <span class="relative flex h-2 w-2">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                     </span>
-                    <span class="text-xs font-mono font-medium text-slate-400 group-hover:text-green-400 transition">
-                        All Systems Operational · 自动发货在线
+                    <span class="text-[11px] font-medium text-slate-300 tracking-wide">
+                        All Systems Operational
                     </span>
                 </div>
             </div>
 
-            <div class="lg:col-span-7 grid grid-cols-2 gap-8 lg:pl-12">
+            <!-- Links Columns -->
+            <div class="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-8">
+                
+                <!-- Product -->
                 <div>
-                    <h4 class="text-white font-bold mb-8 text-sm uppercase tracking-widest">核心服务</h4>
-                    <ul class="space-y-5 text-sm text-slate-500">
-                        <li><a class="hover:text-[#E50914] transition-colors duration-200 block" href="#platforms">严选合租平台</a></li>
-                        <li><a class="hover:text-[#E50914] transition-colors duration-200 block" href="#compare">全网价格对比</a></li>
-                        <li><a class="hover:text-[#E50914] transition-colors duration-200 block" href="#reviews">用户真实评价</a></li>
-                        <li><a class="hover:text-[#E50914] transition-colors duration-200 block" href="#guide">新手上车指南</a></li>
+                    <h4 class="text-white font-bold mb-6 text-xs uppercase tracking-widest text-slate-200">核心产品</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#platforms" class="text-slate-500 hover:text-netflix-red transition-colors block">严选合租平台</a></li>
+                        <li><a href="#compare" class="text-slate-500 hover:text-netflix-red transition-colors block">全网价格对比</a></li>
+                        <li><a href="#reviews" class="text-slate-500 hover:text-netflix-red transition-colors block">用户真实评价</a></li>
+                        <li><a href="#guide" class="text-slate-500 hover:text-netflix-red transition-colors block">新手上车指南</a></li>
                     </ul>
                 </div>
 
+                <!-- Resources -->
                 <div>
-                    <h4 class="text-white font-bold mb-8 text-sm uppercase tracking-widest">客户支持</h4>
-                    <ul class="space-y-5 text-sm text-slate-500">
-                        <li><a class="hover:text-[#E50914] transition-colors duration-200 block" href="#faq">发货与售后说明</a></li>
-                        <li><a class="hover:text-[#E50914] transition-colors duration-200 block" href="#faq">常见问题 (FAQ)</a></li>
-                        <li><a class="hover:text-[#E50914] transition-colors duration-200 block" href="#blog">Netflix 使用技巧</a></li>
-                        <li><a class="hover:text-[#E50914] transition-colors duration-200 block" href="mailto:support@nfhezu.top">联系人工客服</a></li>
+                    <h4 class="text-white font-bold mb-6 text-xs uppercase tracking-widest text-slate-200">探索发现</h4>
+                    <ul class="space-y-4">
+                        <li><a href="blog/netflix-buying-guide.html" class="text-slate-500 hover:text-netflix-red transition-colors block">奈飞购买指南</a></li>
+                        <li><a href="blog/how-to-subscribe-netflix-in-china.html" class="text-slate-500 hover:text-netflix-red transition-colors block">支付教程 (支付宝)</a></li>
+                        <li><a href="blog/netflix-best-movies-shows.html" class="text-slate-500 hover:text-netflix-red transition-colors block">2026 高分片单</a></li>
+                        <li><a href="blog/how-to-watch-netflix-in-china.html" class="text-slate-500 hover:text-netflix-red transition-colors block">国内观看教程</a></li>
                     </ul>
                 </div>
+
+                <!-- Support -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 text-xs uppercase tracking-widest text-slate-200">客户支持</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#faq" class="text-slate-500 hover:text-netflix-red transition-colors block">常见问题 (FAQ)</a></li>
+                        <li><a href="disclaimer.html" class="text-slate-500 hover:text-netflix-red transition-colors block">服务条款</a></li>
+                        <li><a href="privacy.html" class="text-slate-500 hover:text-netflix-red transition-colors block">隐私政策</a></li>
+                        <li><a href="mailto:support@nfhezu.top" class="text-slate-500 hover:text-netflix-red transition-colors block">联系我们</a></li>
+                    </ul>
+                </div>
+
             </div>
         </div>
 
-        <div class="border-t border-white/5 pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-[11px] text-slate-600 text-center md:text-left space-y-2">
-                <p>&copy; 2026 NFhezu.top. All rights reserved.</p>
-                <p class="max-w-2xl leading-relaxed opacity-60">
-                    Disclaimer: NFhezu.top is an independent affiliate service provider. Netflix is a registered trademark of Netflix, Inc. We are not affiliated with, associated with, or endorsed by Netflix, Inc.
-                </p>
-            </div>
+        <!-- Breadcrumbs / Bottom Links -->
+        <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             
-            <div class="flex items-center gap-6 text-[11px] text-slate-600 font-medium">
-                <a href="disclaimer.html" class="hover:text-slate-400 transition">服务条款</a>
-                <a href="privacy.html" class="hover:text-slate-400 transition">隐私政策</a>
-                <a href="#" class="hover:text-slate-400 transition">Sitemap</a>
+            <!-- Breadcrumbs style links (as requested) -->
+            <nav class="flex items-center gap-2 text-[10px] text-slate-600 font-medium overflow-x-auto max-w-full">
+                <a href="#" class="hover:text-slate-400 transition whitespace-nowrap">首页</a>
+                <span class="text-slate-700">/</span>
+                <a href="#platforms" class="hover:text-slate-400 transition whitespace-nowrap">严选平台</a>
+                <span class="text-slate-700">/</span>
+                <a href="#blog" class="hover:text-slate-400 transition whitespace-nowrap">博客文章</a>
+                <span class="text-slate-700">/</span>
+                <span class="text-slate-500 whitespace-nowrap">Sitemap</span>
+            </nav>
+
+            <div class="text-[10px] text-slate-600 text-center md:text-right">
+                <p>&copy; 2026 NFhezu. All rights reserved.</p>
             </div>
+        </div>
+        
+        <div class="mt-4 text-[10px] text-slate-700 text-center max-w-3xl mx-auto leading-relaxed">
+             Disclaimer: NFhezu.top is an independent affiliate service provider. Netflix is a registered trademark of Netflix, Inc. We are not affiliated with, associated with, or endorsed by Netflix, Inc.
         </div>
     </div>
 </footer>
