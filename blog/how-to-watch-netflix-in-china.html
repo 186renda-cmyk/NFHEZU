@@ -339,6 +339,8 @@
             <!-- Right Sidebar (Sticky) -->
             
             <!-- Right Sidebar (30%) -->
+            
+            <!-- Right Sidebar (30%) -->
             <aside class="lg:w-[30%] space-y-8">
                 
                 <!-- CTA Card -->
@@ -429,6 +431,7 @@
                 </div>
 
             </aside>
+
 
         </div>
     </main>
@@ -551,6 +554,17 @@
         </div>
     </div>
 </footer>
+
+
+    <script>
+        function copyCode(code) {
+            navigator.clipboard.writeText(code).then(() => {
+                alert('✅ 优惠码 ' + code + ' 已复制！');
+            }).catch(err => {
+                console.error('复制失败:', err);
+            });
+        }
+    </script>
 
 </body>
 </html>
