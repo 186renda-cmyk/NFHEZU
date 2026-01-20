@@ -343,9 +343,13 @@ def rebuild_head(soup, filename, favicons, is_blog=True):
     
     keywords_tag = old_head.find('meta', attrs={'name': 'keywords'})
     
+    new_head.append('\n')
+
     # --- Group A: Basic Metadata ---
     new_head.append(soup.new_tag('meta', charset="utf-8"))
+    new_head.append('\n')
     new_head.append(soup.new_tag('meta', attrs={"name": "viewport", "content": "width=device-width, initial-scale=1.0"}))
+    new_head.append('\n')
     
     if title_tag:
         new_head.append(title_tag)
@@ -353,15 +357,16 @@ def rebuild_head(soup, filename, favicons, is_blog=True):
         new_title = soup.new_tag('title')
         new_title.string = filename
         new_head.append(new_title)
-        
     new_head.append('\n')
 
     # --- Group B: SEO Core ---
     if desc_tag:
         new_head.append(desc_tag)
+        new_head.append('\n')
     
     if keywords_tag:
         new_head.append(keywords_tag)
+        new_head.append('\n')
         
     # Canonical
     if is_blog:
@@ -371,18 +376,20 @@ def rebuild_head(soup, filename, favicons, is_blog=True):
         
     canonical = soup.new_tag('link', rel="canonical", href=canonical_url)
     new_head.append(canonical)
-    
     new_head.append('\n')
 
     # --- Group C: Indexing & Geo ---
     new_head.append(soup.new_tag('meta', attrs={"name": "robots", "content": "index, follow"}))
+    new_head.append('\n')
     new_head.append(soup.new_tag('meta', attrs={"http-equiv": "content-language", "content": "zh-CN"}))
+    new_head.append('\n')
     
     # Hreflang Matrix
     new_head.append(soup.new_tag('link', rel="alternate", href=canonical_url, hreflang="x-default"))
+    new_head.append('\n')
     new_head.append(soup.new_tag('link', rel="alternate", href=canonical_url, hreflang="zh"))
+    new_head.append('\n')
     new_head.append(soup.new_tag('link', rel="alternate", href=canonical_url, hreflang="zh-CN"))
-    
     new_head.append('\n')
 
     # --- Group D: Branding & Resources ---
@@ -390,6 +397,7 @@ def rebuild_head(soup, filename, favicons, is_blog=True):
     for icon in favicons:
         import copy
         new_head.append(copy.copy(icon))
+        new_head.append('\n')
         
     # Preserve existing CSS/JS (Tailwind, Fonts, etc.)
     for tag in old_head.find_all(['link', 'script', 'style']):
@@ -407,13 +415,13 @@ def rebuild_head(soup, filename, favicons, is_blog=True):
             continue
             
         new_head.append(tag)
-        
-    new_head.append('\n')
+        new_head.append('\n')
 
     # --- Group E: Structured Data ---
     # Generate fresh JSON-LD
     json_ld_tag = generate_json_ld(soup, filename, is_blog=is_blog, title=title_str, desc=desc_str)
     new_head.append(json_ld_tag)
+    new_head.append('\n')
 
     soup.head.replace_with(new_head)
     return soup
