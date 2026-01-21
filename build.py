@@ -663,11 +663,19 @@ def process_file(file_path, assets, all_posts, is_blog=True, inject_recs=True):
         import copy
         new_nav = copy.copy(assets['nav'])
         
-        # Adjust links
+        # Adjust links and remove blockers
         for a in new_nav.find_all('a'):
             href = a.get('href', '')
-            if href.startswith('#'):
+            
+            # Fix Home links
+            if href == '#' or href == '/#':
+                a['href'] = '/'
+            elif href.startswith('#'):
                 a['href'] = '/' + href
+                
+            # Remove onclick handlers that prevent navigation (e.g. scrollTo)
+            if a.has_attr('onclick'):
+                del a['onclick']
         
         old_nav.replace_with(new_nav)
     else:
@@ -680,8 +688,16 @@ def process_file(file_path, assets, all_posts, is_blog=True, inject_recs=True):
         new_footer = copy.copy(assets['footer'])
         for a in new_footer.find_all('a'):
             href = a.get('href', '')
-            if href.startswith('#'):
+            
+            # Fix Home links
+            if href == '#' or href == '/#':
+                a['href'] = '/'
+            elif href.startswith('#'):
                 a['href'] = '/' + href
+                
+            # Remove onclick handlers
+            if a.has_attr('onclick'):
+                del a['onclick']
         
         old_footer.replace_with(new_footer)
     else:
