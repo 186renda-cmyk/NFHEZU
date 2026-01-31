@@ -2,43 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://nfhezu.top/</loc>
-    <lastmod>2026-01-07</lastmod>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://nfhezu.top/blog/</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://nfhezu.top/blog/netflix-buying-guide</loc>
-    <lastmod>2026-01-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://nfhezu.top/blog/how-to-subscribe-netflix-in-china</loc>
-    <lastmod>2026-01-06</lastmod>
+    <loc>https://nfhezu.top/blog/how-to-change-netflix-language-to-chinese</loc>
+    <lastmod>2026-01-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://nfhezu.top/blog/netflix-best-movies-shows</loc>
-    <lastmod>2026-01-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-<url>
-    <loc>https://nfhezu.top/blog/how-to-watch-netflix-in-china</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-01-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://nfhezu.top/blog/how-to-watch-netflix-on-devices</loc>
-    <lastmod>2026-01-14</lastmod>
+    <loc>https://nfhezu.top/blog/netflix-buying-guide</loc>
+    <lastmod>2026-01-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nfhezu.top/blog/how-to-subscribe-netflix-in-china</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nfhezu.top/blog/how-to-watch-netflix-in-china</loc>
+    <lastmod>2026-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -50,8 +50,26 @@
   </url>
   <url>
     <loc>https://nfhezu.top/blog/netflix-content-library-guide</loc>
-    <lastmod>2026-01-12</lastmod>
+    <lastmod>2026-01-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nfhezu.top/blog/how-to-watch-netflix-on-devices</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nfhezu.top/privacy</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://nfhezu.top/disclaimer</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>

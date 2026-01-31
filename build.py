@@ -9,6 +9,20 @@ from bs4 import BeautifulSoup, Comment
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 BLOG_DIR = os.path.join(PROJECT_ROOT, 'blog')
 INDEX_FILE = os.path.join(PROJECT_ROOT, 'index.html')
+BLOG_INDEX_FILE = os.path.join(BLOG_DIR, 'index.html')
+SITEMAP_FILE = os.path.join(PROJECT_ROOT, 'sitemap.xml')
+
+# Manual Metadata for consistency
+POST_METADATA = {
+    'how-to-change-netflix-language-to-chinese.html': {'date': '2026-01-30'},
+    'netflix-best-movies-shows.html': {'date': '2026-01-28'},
+    'netflix-buying-guide.html': {'date': '2026-01-25'},
+    'how-to-subscribe-netflix-in-china.html': {'date': '2026-01-20'},
+    'how-to-watch-netflix-in-china.html': {'date': '2026-01-15'},
+    'best-netflix-region-guide.html': {'date': '2026-01-10'},
+    'netflix-content-library-guide.html': {'date': '2026-01-05'},
+    'how-to-watch-netflix-on-devices.html': {'date': '2026-01-01'}
+}
 
 def read_file(path):
     with open(path, 'r', encoding='utf-8') as f:
@@ -22,6 +36,7 @@ def clean_link(url):
     """
     Remove .html suffix from internal links.
     Keep suffix for files like .ico, .svg, .png, .jpg, .css, .js, .xml, .txt
+    Handles URLs with hashes or query parameters.
     """
     if not url:
         return url
@@ -30,25 +45,81 @@ def clean_link(url):
     if url.startswith(('http:', 'https:', '#', 'data:', 'mailto:', 'tel:')):
         return url
     
+    # Split hash/query
+    main_url = url
+    suffix = ''
+    if '#' in url:
+        parts = url.split('#', 1)
+        main_url = parts[0]
+        suffix = '#' + parts[1]
+    elif '?' in url:
+        parts = url.split('?', 1)
+        main_url = parts[0]
+        suffix = '?' + parts[1]
+
     # List of extensions to preserve
     preserve_exts = ['.ico', '.svg', '.png', '.jpg', '.jpeg', '.gif', '.webp', '.css', '.js', '.xml', '.txt', '.json']
     
     # Check if it has an extension that should be preserved
     for ext in preserve_exts:
-        if url.lower().endswith(ext):
+        if main_url.lower().endswith(ext):
             return url
             
     # Remove .html or .htm suffix
-    return re.sub(r'\.html?$', '', url, flags=re.IGNORECASE)
+    main_url = re.sub(r'\.html?$', '', main_url, flags=re.IGNORECASE)
+    
+    return main_url + suffix
 
-def process_links(soup):
+def process_links(soup, is_blog=False):
     """
     Process all a[href] and img[src] to remove .html suffix where appropriate.
+    Also fixes relative links to absolute paths.
     """
     for tag in soup.find_all(['a', 'link', 'img', 'script']):
         # Handle href
         if tag.has_attr('href'):
-            tag['href'] = clean_link(tag['href'])
+            url = tag['href']
+            
+            # Fix relative links
+            if is_blog and url and not url.startswith(('http:', 'https:', '#', 'data:', 'mailto:', 'tel:', '/')):
+                if url.startswith('../'):
+                    url = '/' + url[3:]
+                elif url == 'index' or url == 'index.html':
+                    url = '/blog/'
+                else:
+                    url = '/blog/' + url
+            
+            # Fix /index
+            if url == '/index' or url == '/index.html':
+                url = '/'
+            elif url.startswith('/index.html#'):
+                url = '/#' + url[12:]
+            elif url.startswith('/index#'):
+                url = '/#' + url[7:]
+
+            # Fix known homepage anchors that might have been malformed
+            known_anchors = ['platforms', 'compare', 'guide', 'faq', 'reviews']
+            for anchor in known_anchors:
+                if url == f'/{anchor}':
+                    url = f'/#{anchor}'
+
+            tag['href'] = clean_link(url)
+            
+            # Add rel="nofollow noopener noreferrer" to external links
+            href = tag['href']
+            if href and (href.startswith('http://') or href.startswith('https://')):
+                # Check if it's an external link (not nfhezu.top)
+                if 'nfhezu.top' not in href:
+                    rel = tag.get('rel', [])
+                    if isinstance(rel, str):
+                        rel = rel.split()
+                    
+                    # Add necessary values if not present
+                    for val in ['nofollow', 'noopener', 'noreferrer']:
+                        if val not in rel:
+                            rel.append(val)
+                    
+                    tag['rel'] = rel
         
         # Handle src
         if tag.has_attr('src'):
@@ -132,7 +203,13 @@ def get_blog_posts():
                 image_url = '/blog/' + image_url
             
             # Get modification time
-            mtime = os.path.getmtime(file_path)
+            # Prioritize manual metadata, then fallback to file mtime
+            if filename in POST_METADATA:
+                date_str = POST_METADATA[filename]['date']
+                dt = datetime.datetime.strptime(date_str, '%Y-%m-%d')
+                mtime = dt.timestamp()
+            else:
+                mtime = os.path.getmtime(file_path)
             
             posts.append({
                 'filename': filename,
@@ -217,7 +294,7 @@ def get_theme(filename):
         return themes['yellow']
     elif 'content' in fn or 'library' in fn or '片源' in fn:
         return themes['blue']
-    elif 'subscribe' in fn or 'pay' in fn or '支付' in fn:
+    elif 'subscribe' in fn or 'pay' in fn or '支付' in fn or 'how-to' in fn or 'tutorial' in fn or 'guide' in fn:
         return themes['cyan']
     elif 'best-movies' in fn or 'recommend' in fn or '片单' in fn:
         return themes['purple']
@@ -229,54 +306,44 @@ def get_theme(filename):
 
 def create_card_html(post):
     """
-    Generate a single card HTML (Rich Design with Icon/Gradient)
+    Generate a single card HTML (Clean SaaS Design)
     Matches the design in blog/index.html
     """
     theme = get_theme(post['filename'])
     
-    # Format date
-    dt = datetime.datetime.fromtimestamp(post['mtime'])
-    date_str = dt.strftime('%Y-%m-%d')
-    
-    # Generate random heat
-    heat = round(random.uniform(0.5, 3.0), 1)
-    heat_str = f"{heat}w"
-    if heat < 1.0:
-        heat_str = f"{int(heat*10)}k"
-        
     return f'''
-    <article class="group bg-[#121212] rounded-2xl overflow-hidden border border-white/10 {theme['border']} transition-all duration-300 hover:-translate-y-1">
-        <a href="{post['url']}" class="block">
-            <div class="aspect-video relative overflow-hidden bg-gradient-to-br {theme['gradient']} transition-colors duration-500">
-                <!-- Decorative Circle -->
-                <div class="absolute -top-8 -right-8 w-32 h-32 {theme['blur_color']} rounded-full blur-2xl transition-all"></div>
-                
-                <!-- Icon -->
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <svg class="w-20 h-20 text-white/20 group-hover:text-white/40 group-hover:scale-110 group-hover:rotate-6 transition duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <article class="group relative h-full bg-[#121212] hover:bg-[#1a1a1a] rounded-2xl overflow-hidden border border-white/5 {theme['border']} transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/50 flex flex-col">
+        <!-- Hover Gradient Effect -->
+        <div class="absolute inset-0 bg-gradient-to-br {theme['gradient']} opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+        
+        <a href="{post['url']}" class="block flex-1 no-underline z-10 flex flex-col p-5">
+            <!-- Header: Icon & Tag -->
+            <div class="flex items-center justify-between mb-3">
+                <div class="{theme['blur_color']} w-8 h-8 rounded-lg flex items-center justify-center text-gray-300 group-hover:text-white transition-colors">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                         {theme['icon']}
                     </svg>
                 </div>
-                
-                <div class="absolute top-4 left-4 z-20 {theme['tag_bg']} text-white text-xs font-bold px-2 py-1 rounded shadow-lg border border-white/10">
+                <span class="text-[10px] font-bold tracking-wider uppercase {theme['tag_bg']} bg-opacity-20 text-gray-300 px-2 py-0.5 rounded-full border border-white/5 group-hover:border-white/10 transition-colors">
                     {theme['tag_text']}
-                </div>
+                </span>
             </div>
             
-            <div class="p-6">
-                <div class="text-xs text-gray-500 mb-2 flex items-center gap-2">
-                    <span>📅 {date_str}</span>
-                    <span>•</span>
-                    <span>🔥 热度: {heat_str}</span>
-                </div>
-                
-                <h3 class="text-xl font-bold text-white mb-3 line-clamp-2 {theme['text_hover']} transition">
-                    {post['title']}
-                </h3>
-                
-                <p class="text-gray-400 text-sm line-clamp-3 leading-relaxed">
-                    {post['description']}
-                </p>
+            <!-- Content -->
+            <h3 class="text-base font-bold text-white mb-2 line-clamp-2 leading-snug group-hover:text-gray-100 transition-colors">
+                {post['title']}
+            </h3>
+            
+            <p class="text-gray-400 text-xs line-clamp-3 leading-relaxed mb-4 flex-1">
+                {post['description']}
+            </p>
+            
+            <!-- Footer: CTA Arrow -->
+            <div class="flex items-center text-[10px] font-medium text-gray-500 group-hover:text-white transition-colors mt-auto pt-3 border-t border-white/5 group-hover:border-white/10">
+                <span>阅读全文</span>
+                <svg class="w-3 h-3 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
             </div>
         </a>
     </article>
@@ -300,8 +367,6 @@ def update_index_html(all_posts):
         return
 
     # Find the grid container
-    # The grid container in index.html might have different classes now.
-    # In the file I read, it was: <div class="grid md:grid-cols-4 gap-6">
     grid = blog_section.find('div', class_='grid')
     if not grid:
         print("Warning: Blog grid not found in index.html")
@@ -317,35 +382,67 @@ def update_index_html(all_posts):
     for post in latest_posts:
         card_html = create_card_html(post)
         card_soup = BeautifulSoup(card_html, 'html.parser')
-        # The card_html is an <article> tag.
-        # Append it to the grid
         grid.append(card_soup)
         
     # Format and Save
     write_file(INDEX_FILE, soup.prettify())
     print("Updated index.html with latest posts.")
 
+def update_blog_index_html(all_posts):
+    """
+    Update blog/index.html with ALL posts.
+    """
+    print(f"Updating {BLOG_INDEX_FILE}...")
+    if not os.path.exists(BLOG_INDEX_FILE):
+        print("Error: blog/index.html not found.")
+        return
+
+    content = read_file(BLOG_INDEX_FILE)
+    soup = BeautifulSoup(content, 'html.parser')
+    
+    # Find the articles grid container
+    grid = soup.find('div', id='articlesGrid')
+    if not grid:
+        print("Warning: #articlesGrid not found in blog/index.html")
+        return
+        
+    # Clear existing cards
+    grid.clear()
+    
+    # Generate new cards for ALL posts
+    for post in all_posts:
+        card_html = create_card_html(post)
+        card_soup = BeautifulSoup(card_html, 'html.parser')
+        grid.append(card_soup)
+        
+    # Format and Save
+    write_file(BLOG_INDEX_FILE, soup.prettify())
+    print("Updated blog/index.html with all posts.")
 
 def generate_recommendations(current_filename, all_posts):
     """
-    Generate HTML for recommended reading (random 2 posts excluding current).
+    Generate HTML for recommended reading (random 4 posts excluding current).
     """
-    others = [p for p in all_posts if p['filename'] != current_filename]
-    if len(others) < 2:
+    others = [p for p in all_posts if p['filename'] != current_filename and p['filename'] != 'how-to-change-netflix-language-to-chinese.html']
+    
+    # User requested 4 cards
+    count = 4
+    if len(others) < count:
         recs = others
     else:
-        recs = random.sample(others, 2)
+        recs = random.sample(others, count)
         
     if not recs:
         return None
 
+    # Use lg:grid-cols-4 for 4 cards
     html = '''
     <div class="mt-16 pt-8 border-t border-white/10 recommendation-section">
         <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
             <span class="w-1 h-6 bg-netflix-red rounded-full shadow-[0_0_12px_rgba(229,9,20,0.6)]"></span>
             推荐阅读
         </h3>
-        <div class="grid md:grid-cols-2 gap-4">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
     '''
     
     for post in recs:
@@ -360,7 +457,6 @@ def generate_recommendations(current_filename, all_posts):
 def generate_json_ld(soup, filename, is_blog=True, title=None, desc=None, posts=None):
     """
     Generate JSON-LD script tag.
-    Includes BreadcrumbList, BlogPosting/WebPage, and ItemList (for blog index).
     """
     domain = "https://nfhezu.top"
     
@@ -370,12 +466,9 @@ def generate_json_ld(soup, filename, is_blog=True, title=None, desc=None, posts=
     
     if is_blog:
         url = f"{domain}/blog/{clean_fn}"
-        
-        # Check if it is the blog index page
         is_blog_index = (clean_fn == '')
         
         if is_blog_index:
-            # Blog Index Page: Breadcrumbs, CollectionPage, and ItemList
             breadcrumb_items = [
                 {"@type": "ListItem", "position": 1, "name": "首页", "item": domain + "/"},
                 {"@type": "ListItem", "position": 2, "name": "探索发现", "item": url}
@@ -406,7 +499,6 @@ def generate_json_ld(soup, filename, is_blog=True, title=None, desc=None, posts=
                 main_schema
             ]
 
-            # Add ItemList if posts are available
             if posts:
                 item_list_elements = []
                 for idx, post in enumerate(posts, 1):
@@ -425,7 +517,6 @@ def generate_json_ld(soup, filename, is_blog=True, title=None, desc=None, posts=
                 schema_objects.append(item_list_schema)
 
         else:
-            # Blog Post: 3 levels, Type BlogPosting
             breadcrumb_items = [
                 {"@type": "ListItem", "position": 1, "name": "首页", "item": domain + "/"},
                 {"@type": "ListItem", "position": 2, "name": "探索发现", "item": domain + "/blog/"},
@@ -436,7 +527,7 @@ def generate_json_ld(soup, filename, is_blog=True, title=None, desc=None, posts=
                 "@context": "https://schema.org",
                 "@type": "BlogPosting",
                 "headline": title,
-                "image": f"{domain}/images/netflix-experience.png", # Default or extract
+                "image": f"{domain}/images/netflix-experience.png",
                 "author": {
                     "@type": "Organization",
                     "name": "NFhezu 编辑部",
@@ -450,7 +541,7 @@ def generate_json_ld(soup, filename, is_blog=True, title=None, desc=None, posts=
                         "url": f"{domain}/logo.png"
                     }
                 },
-                "datePublished": datetime.date.today().isoformat(), # Ideally parse from content
+                "datePublished": datetime.date.today().isoformat(),
                 "dateModified": datetime.date.today().isoformat(),
                 "description": desc or title
             }
@@ -464,7 +555,6 @@ def generate_json_ld(soup, filename, is_blog=True, title=None, desc=None, posts=
                 main_schema
             ]
     else:
-        # Root pages like privacy, disclaimer
         url = f"{domain}/{clean_fn}"
         breadcrumb_items = [
             {"@type": "ListItem", "position": 1, "name": "首页", "item": domain + "/"},
@@ -486,7 +576,6 @@ def generate_json_ld(soup, filename, is_blog=True, title=None, desc=None, posts=
             }
         ]
 
-    # Create script tag
     final_json = {
         "@context": "https://schema.org",
         "@graph": schema_objects
@@ -499,39 +588,28 @@ def generate_json_ld(soup, filename, is_blog=True, title=None, desc=None, posts=
 def ensure_breadcrumb_html(soup, is_blog=True):
     """
     Ensure there is a visual breadcrumb with aria-label="breadcrumb".
-    Fixes audit.py warning.
     """
-    # Try to find existing breadcrumb-like nav
-    # Heuristic: nav containing "首页" link
     navs = soup.find_all('nav')
     breadcrumb_nav = None
     
     for nav in navs:
-        # Check if it's the main nav (skip)
         if nav.get('id') == 'main-nav':
             continue
-        
-        # Check text content
         if "首页" in nav.get_text():
             breadcrumb_nav = nav
             break
             
     if breadcrumb_nav:
-        # Fix existing
         breadcrumb_nav['aria-label'] = 'breadcrumb'
     else:
-        # Create new if missing (simple version)
-        # Only insert if we have a main container
         main = soup.find('main')
         if main:
             new_nav = soup.new_tag('nav', attrs={'aria-label': 'breadcrumb', 'class': 'flex mb-8 text-xs text-slate-500 font-medium tracking-wide uppercase'})
             
-            # Home link
             link_home = soup.new_tag('a', href='/', attrs={'class': 'hover:text-slate-300 transition'})
             link_home.string = "首页"
             new_nav.append(link_home)
             
-            # Separator
             sep = soup.new_tag('span', attrs={'class': 'mx-2'})
             sep.string = "/"
             new_nav.append(sep)
@@ -545,13 +623,52 @@ def ensure_breadcrumb_html(soup, is_blog=True):
                 sep2.string = "/"
                 new_nav.append(sep2)
             
-            # Current page (text only)
             current = soup.new_tag('span', attrs={'class': 'text-slate-300'})
-            current.string = "当前页面" # Placeholder, hard to get exact title here without passing it
+            current.string = "当前页面" 
             new_nav.append(current)
             
             main.insert(0, new_nav)
             
+    return soup
+
+def ensure_author_date_visible(soup, mtime):
+    """
+    Ensure the article header contains visible Author and Date information.
+    """
+    header = soup.find('header')
+    if not header:
+        return soup
+        
+    # Check if author/date block exists (by checking for time tag or specific class)
+    if header.find('time'):
+        return soup
+        
+    # Create the block
+    dt = datetime.datetime.fromtimestamp(mtime)
+    date_str = dt.strftime('%Y-%m-%d')
+    
+    html = f'''
+    <div class="flex items-center gap-4 text-sm text-gray-400 border-b border-white/10 pb-8 mt-6">
+         <div class="flex items-center gap-3">
+             <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#E50914] to-black border border-white/10 flex items-center justify-center text-white font-bold text-xs shadow-lg relative overflow-hidden group">
+                 <span class="relative z-10">NF</span>
+                 <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+             </div>
+             <div>
+                 <span class="text-white font-bold block">NFhezu 编辑部</span>
+                 <span class="text-xs text-[#E50914]">资深流媒体观察员</span>
+             </div>
+         </div>
+         <div class="h-8 w-px bg-white/10 mx-2"></div>
+         <div class="flex flex-col gap-0.5">
+             <time datetime="{date_str}" class="text-gray-300 font-medium">{date_str}</time>
+             <span class="text-xs text-gray-500">最后更新</span>
+         </div>
+    </div>
+    '''
+    
+    block_soup = BeautifulSoup(html, 'html.parser')
+    header.append(block_soup)
     return soup
 
 def rebuild_head(soup, filename, favicons, is_blog=True, posts=None):
@@ -561,7 +678,6 @@ def rebuild_head(soup, filename, favicons, is_blog=True, posts=None):
     old_head = soup.head
     new_head = soup.new_tag('head')
     
-    # Extract metadata for reuse
     title_tag = old_head.find('title')
     title_str = title_tag.string.strip() if title_tag and title_tag.string else filename
     
@@ -570,7 +686,6 @@ def rebuild_head(soup, filename, favicons, is_blog=True, posts=None):
     
     keywords_tag = old_head.find('meta', attrs={'name': 'keywords'})
     
-    # --- Group A: Basic Metadata ---
     new_head.append(soup.new_tag('meta', charset="utf-8"))
     new_head.append(soup.new_tag('meta', attrs={"name": "viewport", "content": "width=device-width, initial-scale=1.0"}))
     
@@ -581,14 +696,12 @@ def rebuild_head(soup, filename, favicons, is_blog=True, posts=None):
         new_title.string = filename
         new_head.append(new_title)
 
-    # --- Group B: SEO Core ---
     if desc_tag:
         new_head.append(desc_tag)
     
     if keywords_tag:
         new_head.append(keywords_tag)
         
-    # Canonical
     clean_fn = clean_link(filename)
     if clean_fn == 'index':
         clean_fn = ''
@@ -601,44 +714,128 @@ def rebuild_head(soup, filename, favicons, is_blog=True, posts=None):
     canonical = soup.new_tag('link', rel="canonical", href=canonical_url)
     new_head.append(canonical)
 
-    # --- Group C: Indexing & Geo ---
     new_head.append(soup.new_tag('meta', attrs={"name": "robots", "content": "index, follow"}))
     new_head.append(soup.new_tag('meta', attrs={"http-equiv": "content-language", "content": "zh-CN"}))
     
-    # Hreflang Matrix
     new_head.append(soup.new_tag('link', rel="alternate", href=canonical_url, hreflang="x-default"))
     new_head.append(soup.new_tag('link', rel="alternate", href=canonical_url, hreflang="zh"))
     new_head.append(soup.new_tag('link', rel="alternate", href=canonical_url, hreflang="zh-CN"))
 
-    # --- Group D: Branding & Resources ---
-    # Favicons (from Phase 1)
     for icon in favicons:
         import copy
         new_head.append(copy.copy(icon))
         
-    # Preserve existing CSS/JS (Tailwind, Fonts, etc.)
     for tag in old_head.find_all(['link', 'script', 'style']):
-        # Skip favicons
         if tag.name == 'link' and 'icon' in str(tag.get('rel', '')):
             continue
-        # Skip canonical
         if tag.name == 'link' and tag.get('rel') == ['canonical']:
             continue
-        # Skip alternate/hreflang
         if tag.name == 'link' and tag.get('rel') == ['alternate']:
             continue
-        # Skip old JSON-LD (we will regenerate)
         if tag.name == 'script' and tag.get('type') == 'application/ld+json':
             continue
-            
         new_head.append(tag)
 
-    # --- Group E: Structured Data ---
-    # Generate fresh JSON-LD
     json_ld_tag = generate_json_ld(soup, filename, is_blog=is_blog, title=title_str, desc=desc_str, posts=posts)
     new_head.append(json_ld_tag)
 
     soup.head.replace_with(new_head)
+    return soup
+
+def generate_sitemap(all_posts):
+    """
+    Generate sitemap.xml
+    """
+    print(f"Generating {SITEMAP_FILE}...")
+    
+    domain = "https://nfhezu.top"
+    today = datetime.date.today().isoformat()
+    
+    # Start XML
+    xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
+    xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    
+    # 1. Homepage
+    xml += f'''  <url>
+    <loc>{domain}/</loc>
+    <lastmod>{today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+'''
+    
+    # 2. Blog Index
+    xml += f'''  <url>
+    <loc>{domain}/blog/</loc>
+    <lastmod>{today}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+'''
+
+    # 3. Blog Posts
+    for post in all_posts:
+        dt = datetime.datetime.fromtimestamp(post['mtime'])
+        date_str = dt.strftime('%Y-%m-%d')
+        url = f"{domain}{post['url']}"
+        xml += f'''  <url>
+    <loc>{url}</loc>
+    <lastmod>{date_str}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+'''
+
+    # 4. Other Pages (Privacy, Disclaimer)
+    others = ['privacy.html', 'disclaimer.html']
+    for filename in others:
+        if os.path.exists(os.path.join(PROJECT_ROOT, filename)):
+            url = f"{domain}/{clean_link(filename)}"
+            xml += f'''  <url>
+    <loc>{url}</loc>
+    <lastmod>{today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+'''
+            
+    xml += '</urlset>'
+    write_file(SITEMAP_FILE, xml)
+    print("Sitemap generated.")
+
+def fix_styles(soup):
+    """
+    Inject CSS to fix prose styles interfering with recommendation cards.
+    """
+    style_tag = soup.find('style')
+    if not style_tag:
+        style_tag = soup.new_tag('style')
+        if soup.head:
+            soup.head.append(style_tag)
+    
+    css_fix = """
+        /* Fix for recommendation cards inheriting prose styles */
+        .recommendation-section a { 
+            text-decoration: none !important; 
+            color: inherit !important; 
+            font-weight: inherit !important;
+        }
+        .recommendation-section a:hover { 
+            color: inherit !important; 
+            text-decoration: none !important;
+        }
+        /* Fix layout issues */
+        .recommendation-section article {
+            height: 100%;
+        }
+    """
+    
+    if style_tag.string:
+        if "Fix for recommendation cards" not in style_tag.string:
+            style_tag.string += css_fix
+    else:
+        style_tag.string = css_fix
+        
     return soup
 
 def process_file(file_path, assets, all_posts, is_blog=True, inject_recs=True):
@@ -648,35 +845,30 @@ def process_file(file_path, assets, all_posts, is_blog=True, inject_recs=True):
     content = read_file(file_path)
     soup = BeautifulSoup(content, 'html.parser')
     
-    # --- Phase 2: Head Reconstruction ---
-    # Pass all_posts to rebuild_head for JSON-LD generation
     soup = rebuild_head(soup, filename, assets['favicons'], is_blog=is_blog, posts=all_posts)
-    
-    # --- Fix Breadcrumb HTML (for audit) ---
     soup = ensure_breadcrumb_html(soup, is_blog=is_blog)
     
-    # --- Phase 3: Injection ---
+    # Fix styles for all blog posts
+    if is_blog:
+        soup = fix_styles(soup)
     
-    # 1. Layout Sync (Nav & Footer)
+    # Inject Author/Date for Blog Articles (not index)
+    if is_blog and inject_recs:
+        mtime = os.path.getmtime(file_path)
+        soup = ensure_author_date_visible(soup, mtime)
+    
     old_nav = soup.find('nav', id='main-nav') or soup.find('nav')
     if old_nav:
         import copy
         new_nav = copy.copy(assets['nav'])
-        
-        # Adjust links and remove blockers
         for a in new_nav.find_all('a'):
             href = a.get('href', '')
-            
-            # Fix Home links
             if href == '#' or href == '/#':
                 a['href'] = '/'
             elif href.startswith('#'):
                 a['href'] = '/' + href
-                
-            # Remove onclick handlers that prevent navigation (e.g. scrollTo)
             if a.has_attr('onclick'):
                 del a['onclick']
-        
         old_nav.replace_with(new_nav)
     else:
         if soup.body:
@@ -688,60 +880,49 @@ def process_file(file_path, assets, all_posts, is_blog=True, inject_recs=True):
         new_footer = copy.copy(assets['footer'])
         for a in new_footer.find_all('a'):
             href = a.get('href', '')
-            
-            # Fix Home links
             if href == '#' or href == '/#':
                 a['href'] = '/'
             elif href.startswith('#'):
                 a['href'] = '/' + href
-                
-            # Remove onclick handlers
             if a.has_attr('onclick'):
                 del a['onclick']
-        
         old_footer.replace_with(new_footer)
     else:
         if soup.body:
             soup.body.append(assets['footer'])
             
-    # 3. Smart Recommendation Injection (Only for Blog Articles)
     if is_blog and inject_recs:
         article = soup.find('article')
         if article:
-            # Remove previous recommendations
-            # 1. By class 'recommendation-section' (our current marker)
             for div in article.find_all('div', class_='recommendation-section'):
                  div.decompose()
             
-            # 2. By structure/text content (legacy markers)
-            # Find all divs that might be recommendation sections
-            # Pattern 1: mt-16 pt-10 ...
             for div in article.find_all('div', class_='mt-16 pt-10 border-t border-white/10'):
                  if "推荐阅读" in div.get_text():
                      div.decompose()
             
-            # Pattern 2: mt-12 pt-8 ... (Found in devices guide)
             for div in article.find_all('div', class_='mt-12 pt-8 border-t border-white/10'):
                  if "推荐阅读" in div.get_text():
                      div.decompose()
                      
-            # Pattern 3: Generic fallback - find any h3 with "推荐阅读" and remove its parent div if it looks like a section
-            # This is a bit risky if structure varies, but let's try to be safe
             for h3 in article.find_all('h3'):
                 if "推荐阅读" in h3.get_text():
-                    # Check if parent is a div that looks like a wrapper
                     parent = h3.parent
                     if parent.name == 'div' and ('border-t' in parent.get('class', [])):
                         parent.decompose()
+
+            # Remove in-content recommendation links (e.g. "👉 延伸阅读：...")
+            for p in article.find_all('p'):
+                text = p.get_text()
+                if "延伸阅读" in text or "推荐阅读" in text:
+                    if p.find('a'):
+                        p.decompose()
 
             recommendations = generate_recommendations(filename, all_posts)
             if recommendations:
                 article.append(recommendations)
             
-    # 4. Global Update (Link Cleaning)
-    soup = process_links(soup)
-    
-    # Save
+    soup = process_links(soup, is_blog=is_blog)
     write_file(file_path, soup.prettify())
     print(f"Saved {filename}")
 
@@ -752,18 +933,22 @@ def main():
         print("Error: index.html not found.")
         return
 
-    # Phase 1
     assets = extract_assets()
     if not assets:
         return
     
-    # Get blog posts for recommendations
     all_posts = get_blog_posts()
     
-    # Update Homepage with latest blog posts
+    # 1. Update Homepage Article Cards
     update_index_html(all_posts)
     
-    # Process Blog Files
+    # 2. Update Blog Index Page (New)
+    update_blog_index_html(all_posts)
+    
+    # 3. Generate Sitemap (New)
+    generate_sitemap(all_posts)
+    
+    # 4. Process All Blog Posts
     if os.path.exists(BLOG_DIR):
         for filename in os.listdir(BLOG_DIR):
             if not filename.endswith('.html'):
@@ -771,44 +956,13 @@ def main():
             
             file_path = os.path.join(BLOG_DIR, filename)
             
-            # Treat index.html in blog special: it is a blog page but not an article
-            # So we process it but don't inject recommendations
             if filename == 'index.html':
-                 # Passing is_blog=False prevents recommendation injection
-                 # But we might want is_blog=True for breadcrumbs? 
-                 # Let's check ensure_breadcrumb_html. 
-                 # It adds "Blog" link if is_blog=True. 
-                 # For blog/index.html, we probably don't need "Home > Blog > Blog".
-                 # So is_blog=False might be safer for breadcrumbs too (Home > Title).
-                 # Wait, for blog/index.html title is "探索发现...". 
-                 # If is_blog=False: Home > 探索发现...
-                 # If is_blog=True: Home > Blog > 探索发现...
-                 # Actually, let's look at process_file's recommendation logic.
-                 # It checks `if is_blog: article = soup.find('article')`.
-                 # blog/index.html likely doesn't have an <article> tag for content, 
-                 # or if it does, we don't want to inject there.
-                 # Let's try is_blog=True but assume it handles itself or we modify process_file.
-                 
-                 # Simpler approach: 
-                 # We want to format it and update header/nav/footer.
-                 # We DON'T want recommendations.
-                 # We want breadcrumbs to be correct.
-                 
-                 # Let's inspect blog/index.html content to see if it has <article>.
-                 # Previous read shows it has <div id="articlesGrid"> but maybe not <article> wrapper for main content.
-                 # Ah, the cards are <article> tags.
-                 # process_file finds `soup.find('article')` which finds the *first* article.
-                 # If we run it on blog/index.html, it might inject recommendations into the first card!
-                 # That would be bad.
-                 
-                 # So we MUST skip recommendation injection for index.html.
-                 # Let's modify process_file to take an optional `inject_recs` param, default True.
+                 # Skip recommendations and author/date injection for index
                  process_file(file_path, assets, all_posts, is_blog=True, inject_recs=False)
             else:
                  process_file(file_path, assets, all_posts, is_blog=True, inject_recs=True)
             
-    # Process Root Files (Privacy, Disclaimer)
-    # Explicitly list files to process in root to avoid processing index.html or others unintentionally
+    # 5. Process Root Pages
     root_files_to_process = ['privacy.html', 'disclaimer.html']
     for filename in root_files_to_process:
         file_path = os.path.join(PROJECT_ROOT, filename)

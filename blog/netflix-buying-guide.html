@@ -40,7 +40,7 @@
             }
         }
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;display=swap" rel="stylesheet nofollow noopener noreferrer"/>
   <style>
    body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; }
         .prose h2 { color: #fff; font-weight: 700; margin-top: 2em; margin-bottom: 1em; font-size: 1.5rem; }
@@ -69,6 +69,21 @@
             background: #ffffff;
             border: 1px solid rgba(255, 255, 255, 0.8);
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+  
+        /* Fix for recommendation cards inheriting prose styles */
+        .recommendation-section a { 
+            text-decoration: none !important; 
+            color: inherit !important; 
+            font-weight: inherit !important;
+        }
+        .recommendation-section a:hover { 
+            color: inherit !important; 
+            text-decoration: none !important;
+        }
+        /* Fix layout issues */
+        .recommendation-section article {
+            height: 100%;
         }
   </style>
   <script type="application/ld+json">
@@ -117,8 +132,8 @@
           "url": "https://nfhezu.top/logo.png"
         }
       },
-      "datePublished": "2026-01-22",
-      "dateModified": "2026-01-22",
+      "datePublished": "2026-01-31",
+      "dateModified": "2026-01-31",
       "description": "想要买奈飞（Netflix）会员？本文整理了官方渠道、礼品卡充值及第三方合租平台的购买方式，教你如何避坑，找到最靠谱的奈飞会员购买渠道。2026年最新版。"
     }
   ]
@@ -412,82 +427,148 @@
        </span>
        推荐阅读
       </h3>
-      <div class="grid md:grid-cols-2 gap-4">
-       <article class="group bg-[#121212] rounded-2xl overflow-hidden border border-white/10 hover:border-cyan-500/50 transition-all duration-300 hover:-translate-y-1">
-        <a class="block" href="/blog/how-to-subscribe-netflix-in-china">
-         <div class="aspect-video relative overflow-hidden bg-gradient-to-br from-[#05202a] to-[#0a0a0a] group-hover:from-[#0a3045] transition-colors duration-500">
-          <!-- Decorative Circle -->
-          <div class="absolute -top-8 -right-8 w-32 h-32 bg-cyan-500/10 group-hover:bg-cyan-500/20 rounded-full blur-2xl transition-all">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+       <article class="group relative h-full bg-[#121212] hover:bg-[#1a1a1a] rounded-2xl overflow-hidden border border-white/5 hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/50 flex flex-col">
+        <!-- Hover Gradient Effect -->
+        <div class="absolute inset-0 bg-gradient-to-br from-[#1a0524] to-[#0a0a0a] group-hover:from-[#2d0a3d] opacity-0 group-hover:opacity-10 transition-opacity duration-500">
+        </div>
+        <a class="block flex-1 no-underline z-10 flex flex-col p-5" href="/blog/netflix-best-movies-shows">
+         <!-- Header: Icon & Tag -->
+         <div class="flex items-center justify-between mb-3">
+          <div class="bg-purple-500/5 group-hover:bg-purple-500/10 w-8 h-8 rounded-lg flex items-center justify-center text-gray-300 group-hover:text-white transition-colors">
+           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+            <path d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+            </path>
+           </svg>
           </div>
-          <!-- Icon -->
-          <div class="absolute inset-0 flex items-center justify-center">
-           <svg class="w-20 h-20 text-white/20 group-hover:text-white/40 group-hover:scale-110 group-hover:rotate-6 transition duration-500" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+          <span class="text-[10px] font-bold tracking-wider uppercase bg-purple-600 bg-opacity-20 text-gray-300 px-2 py-0.5 rounded-full border border-white/5 group-hover:border-white/10 transition-colors">
+           片单推荐
+          </span>
+         </div>
+         <!-- Content -->
+         <h3 class="text-base font-bold text-white mb-2 line-clamp-2 leading-snug group-hover:text-gray-100 transition-colors">
+          2026 奈飞(Netflix) 看什么？高分神剧与电影必看片单推荐 | NFHEZU.TOP
+         </h3>
+         <p class="text-gray-400 text-xs line-clamp-3 leading-relaxed mb-4 flex-1">
+          2026年最新Netflix追剧指南。精选《怪奇物语》、《黑镜》、《百年孤独》等口碑炸裂的电视剧与电影，涵盖悬疑、科幻、动作等多种题材，治愈你的剧荒。
+         </p>
+         <!-- Footer: CTA Arrow -->
+         <div class="flex items-center text-[10px] font-medium text-gray-500 group-hover:text-white transition-colors mt-auto pt-3 border-t border-white/5 group-hover:border-white/10">
+          <span>
+           阅读全文
+          </span>
+          <svg class="w-3 h-3 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+           <path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+           </path>
+          </svg>
+         </div>
+        </a>
+       </article>
+       <article class="group relative h-full bg-[#121212] hover:bg-[#1a1a1a] rounded-2xl overflow-hidden border border-white/5 hover:border-cyan-500/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/50 flex flex-col">
+        <!-- Hover Gradient Effect -->
+        <div class="absolute inset-0 bg-gradient-to-br from-[#05202a] to-[#0a0a0a] group-hover:from-[#0a3045] opacity-0 group-hover:opacity-10 transition-opacity duration-500">
+        </div>
+        <a class="block flex-1 no-underline z-10 flex flex-col p-5" href="/blog/how-to-watch-netflix-in-china">
+         <!-- Header: Icon & Tag -->
+         <div class="flex items-center justify-between mb-3">
+          <div class="bg-cyan-500/10 group-hover:bg-cyan-500/20 w-8 h-8 rounded-lg flex items-center justify-center text-gray-300 group-hover:text-white transition-colors">
+           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
             <path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
             </path>
            </svg>
           </div>
-          <div class="absolute top-4 left-4 z-20 bg-cyan-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg border border-white/10">
+          <span class="text-[10px] font-bold tracking-wider uppercase bg-cyan-600 bg-opacity-20 text-gray-300 px-2 py-0.5 rounded-full border border-white/5 group-hover:border-white/10 transition-colors">
            新手教程
-          </div>
+          </span>
          </div>
-         <div class="p-6">
-          <div class="text-xs text-gray-500 mb-2 flex items-center gap-2">
-           <span>
-            📅 2026-01-22
-           </span>
-           <span>
-            •
-           </span>
-           <span>
-            🔥 热度: 7k
-           </span>
-          </div>
-          <h3 class="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-cyan-400 transition">
-           在国内怎么开通奈飞会员？2026年最新保姆级教程 (含礼品卡/虚拟卡攻略) | NFHEZU.TOP
-          </h3>
-          <p class="text-gray-400 text-sm line-clamp-3 leading-relaxed">
-           在国内开通奈飞（Netflix）会员最全攻略。详解官方礼品卡兑换与虚拟信用卡支付两种方式，手把手教你解决支付和网络难题，轻松实现观影自由。2026年最新版。
-          </p>
+         <!-- Content -->
+         <h3 class="text-base font-bold text-white mb-2 line-clamp-2 leading-snug group-hover:text-gray-100 transition-colors">
+          奈飞会员在国内怎么用？2026 最新观看指南 | NFHEZU.TOP
+         </h3>
+         <p class="text-gray-400 text-xs line-clamp-3 leading-relaxed mb-4 flex-1">
+          在国内怎么看奈飞(Netflix)？本文为您详细解答网络环境配置、账号购买方式（合租vs独享）、支付难题解决以及如何在电视投影仪上流畅观看4K HDR内容。
+         </p>
+         <!-- Footer: CTA Arrow -->
+         <div class="flex items-center text-[10px] font-medium text-gray-500 group-hover:text-white transition-colors mt-auto pt-3 border-t border-white/5 group-hover:border-white/10">
+          <span>
+           阅读全文
+          </span>
+          <svg class="w-3 h-3 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+           <path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+           </path>
+          </svg>
          </div>
         </a>
        </article>
-       <article class="group bg-[#121212] rounded-2xl overflow-hidden border border-white/10 hover:border-green-500/50 transition-all duration-300 hover:-translate-y-1">
-        <a class="block" href="/blog/how-to-watch-netflix-in-china">
-         <div class="aspect-video relative overflow-hidden bg-gradient-to-br from-[#052005] to-[#0a0a0a] group-hover:from-[#0a300a] transition-colors duration-500">
-          <!-- Decorative Circle -->
-          <div class="absolute -top-8 -right-8 w-32 h-32 bg-green-500/5 group-hover:bg-green-500/10 rounded-full blur-2xl transition-all">
-          </div>
-          <!-- Icon -->
-          <div class="absolute inset-0 flex items-center justify-center">
-           <svg class="w-20 h-20 text-white/20 group-hover:text-white/40 group-hover:scale-110 group-hover:rotate-6 transition duration-500" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-            <path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
-            </path>
-            <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+       <article class="group relative h-full bg-[#121212] hover:bg-[#1a1a1a] rounded-2xl overflow-hidden border border-white/5 hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/50 flex flex-col">
+        <!-- Hover Gradient Effect -->
+        <div class="absolute inset-0 bg-gradient-to-br from-[#0a102a] to-[#0a0a0a] group-hover:from-[#0f1c4d] opacity-0 group-hover:opacity-10 transition-opacity duration-500">
+        </div>
+        <a class="block flex-1 no-underline z-10 flex flex-col p-5" href="/blog/netflix-content-library-guide">
+         <!-- Header: Icon & Tag -->
+         <div class="flex items-center justify-between mb-3">
+          <div class="bg-blue-500/10 group-hover:bg-blue-500/20 w-8 h-8 rounded-lg flex items-center justify-center text-gray-300 group-hover:text-white transition-colors">
+           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+            <path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
             </path>
            </svg>
           </div>
-          <div class="absolute top-4 left-4 z-20 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded shadow-lg border border-white/10">
-           观看指南
-          </div>
+          <span class="text-[10px] font-bold tracking-wider uppercase bg-blue-600 bg-opacity-20 text-gray-300 px-2 py-0.5 rounded-full border border-white/5 group-hover:border-white/10 transition-colors">
+           深度解析
+          </span>
          </div>
-         <div class="p-6">
-          <div class="text-xs text-gray-500 mb-2 flex items-center gap-2">
-           <span>
-            📅 2026-01-22
-           </span>
-           <span>
-            •
-           </span>
-           <span>
-            🔥 热度: 2.6w
-           </span>
+         <!-- Content -->
+         <h3 class="text-base font-bold text-white mb-2 line-clamp-2 leading-snug group-hover:text-gray-100 transition-colors">
+          奈飞哪个地区片源多？全球 Netflix 片库数量与字幕对比 | NFHEZU.TOP
+         </h3>
+         <p class="text-gray-400 text-xs line-clamp-3 leading-relaxed mb-4 flex-1">
+          追求最全片库还是中文字幕？本文深度对比美区、港台区、新加坡及土耳其区的片源数量与字幕支持情况，助你找到最佳观影地区。
+         </p>
+         <!-- Footer: CTA Arrow -->
+         <div class="flex items-center text-[10px] font-medium text-gray-500 group-hover:text-white transition-colors mt-auto pt-3 border-t border-white/5 group-hover:border-white/10">
+          <span>
+           阅读全文
+          </span>
+          <svg class="w-3 h-3 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+           <path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+           </path>
+          </svg>
+         </div>
+        </a>
+       </article>
+       <article class="group relative h-full bg-[#121212] hover:bg-[#1a1a1a] rounded-2xl overflow-hidden border border-white/5 hover:border-cyan-500/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/50 flex flex-col">
+        <!-- Hover Gradient Effect -->
+        <div class="absolute inset-0 bg-gradient-to-br from-[#05202a] to-[#0a0a0a] group-hover:from-[#0a3045] opacity-0 group-hover:opacity-10 transition-opacity duration-500">
+        </div>
+        <a class="block flex-1 no-underline z-10 flex flex-col p-5" href="/blog/how-to-watch-netflix-on-devices">
+         <!-- Header: Icon & Tag -->
+         <div class="flex items-center justify-between mb-3">
+          <div class="bg-cyan-500/10 group-hover:bg-cyan-500/20 w-8 h-8 rounded-lg flex items-center justify-center text-gray-300 group-hover:text-white transition-colors">
+           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+            <path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+            </path>
+           </svg>
           </div>
-          <h3 class="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-green-400 transition">
-           奈飞会员在国内怎么用？2026 最新观看指南 | NFHEZU.TOP
-          </h3>
-          <p class="text-gray-400 text-sm line-clamp-3 leading-relaxed">
-           在国内怎么看奈飞(Netflix)？本文为您详细解答网络环境配置、账号购买方式（合租vs独享）、支付难题解决以及如何在电视投影仪上流畅观看4K HDR内容。
-          </p>
+          <span class="text-[10px] font-bold tracking-wider uppercase bg-cyan-600 bg-opacity-20 text-gray-300 px-2 py-0.5 rounded-full border border-white/5 group-hover:border-white/10 transition-colors">
+           新手教程
+          </span>
+         </div>
+         <!-- Content -->
+         <h3 class="text-base font-bold text-white mb-2 line-clamp-2 leading-snug group-hover:text-gray-100 transition-colors">
+          奈飞怎么看剧？电脑/手机/电视全设备观看指南 | NFHEZU.TOP
+         </h3>
+         <p class="text-gray-400 text-xs line-clamp-3 leading-relaxed mb-4 flex-1">
+          想看 Netflix 却不知道怎么操作？本文为您提供 Windows/Mac 电脑、iOS/Android 手机、以及智能电视/电视盒子的详细观看教程，涵盖下载、登录及网络设置。
+         </p>
+         <!-- Footer: CTA Arrow -->
+         <div class="flex items-center text-[10px] font-medium text-gray-500 group-hover:text-white transition-colors mt-auto pt-3 border-t border-white/5 group-hover:border-white/10">
+          <span>
+           阅读全文
+          </span>
+          <svg class="w-3 h-3 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+           <path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+           </path>
+          </svg>
          </div>
         </a>
        </article>

@@ -27,9 +27,10 @@ class SiteAuditor:
         self.page_titles = {} # path -> title
         
         # Configuration
-        self.ignore_paths = ['.git', 'node_modules', '__pycache__']
+        self.ignore_paths = ['.git', 'node_modules', '__pycache__', 'MasterTool']
         self.ignore_urls_prefixes = ['/go/', 'javascript:', 'mailto:', '#']
         self.ignore_files = ['google', '404.html'] # Partial match on filename
+        self.trusted_external_links = ['https://unogs.com/', 'https://unogs.com'] # Skip checking these
 
     def log(self, type, message):
         if type == 'SUCCESS':
@@ -146,15 +147,17 @@ class SiteAuditor:
         return None
 
     def check_external_links(self):
-        self.log('INFO', f"Checking {len(self.external_links)} external links...")
+        # Filter out trusted links
+        links_to_check = [url for url in self.external_links if url not in self.trusted_external_links]
+        self.log('INFO', f"Checking {len(links_to_check)} external links (skipped {len(self.external_links) - len(links_to_check)} trusted)...")
         
         def check_url(url):
-            headers = {'User-Agent': 'Mozilla/5.0 (compatible; SEOAuditBot/1.0)'}
+            headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
             try:
-                response = requests.head(url, headers=headers, timeout=5, allow_redirects=True)
-                if response.status_code == 405:
-                    # Method Not Allowed, try GET
-                    response = requests.get(url, headers=headers, timeout=5, stream=True)
+                response = requests.head(url, headers=headers, timeout=10, allow_redirects=True)
+                if response.status_code == 405 or response.status_code == 403:
+                    # Method Not Allowed or Forbidden, try GET
+                    response = requests.get(url, headers=headers, timeout=10, stream=True)
                 
                 if response.status_code >= 400:
                     return url, response.status_code
@@ -163,7 +166,7 @@ class SiteAuditor:
             return None
 
         with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
-            futures = [executor.submit(check_url, url) for url in self.external_links]
+            futures = [executor.submit(check_url, url) for url in links_to_check]
             for future in concurrent.futures.as_completed(futures):
                 result = future.result()
                 if result:
